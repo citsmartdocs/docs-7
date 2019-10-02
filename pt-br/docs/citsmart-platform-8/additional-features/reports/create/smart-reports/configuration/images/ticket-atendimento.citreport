@@ -1,0 +1,498 @@
+<?xml version="1.0" ?><br.com.centralit.citcorpore.bean.SmartReportDTO><identificacao>RelatorioPorTicketAtendimento</identificacao><descricao>Relatorio Por Ticket Atendimento</descricao><idCategoria>1</idCategoria><tipoConsulta>2</tipoConsulta><tipoRelatorio>7</tipoRelatorio><parametros>&lt;?xml version="1.0" encoding="ISO-8859-1" ?&gt;
+&lt;PARAMETERS&gt;
+	&lt;PARAM name='requestId' type='java.lang.Integer' typeHTML='text' size='10'  value='' description='visao.idSolicitacao' fix='false' mandatory='false'/&gt;
+	&lt;PARAM name='typeDate' type='java.lang.Integer' typeHTML='select' value='1' description='citcorpore.texto.periodo' fix='false' mandatory='false' reload='true' onload='true' default='1'&gt;
+	    &lt;OPTION value='0' text='expression.function.serviceRequest.getRequestTimestamp'/&gt;
+	    &lt;OPTION value='1' text='citcorpore.comum.dataEncerramento'/&gt;
+ 	&lt;/PARAM&gt;
+	&lt;PARAM name='startDate' type='java.sql.Date' size='10' value='' description='citcorpore.comum.datainicio' fix='false' mandatory='false' default='{MONTH_AGO}'/&gt;
+	&lt;PARAM name='endDate' type='java.sql.Date' size='10'value='' description='citcorpore.comum.datafim' fix='false' mandatory='false' default='{TODAY}'/&gt;
+	&lt;PARAM name='contractId' type='java.lang.Integer' typeHTML='select' value='' description='Contract' fix='false' mandatory='false' reload='true' onload='true'&gt;
+		&lt;OPTION value='-1' text='ALL'/&gt; 
+		&lt;OPTIONS type='SQL' onload='true'&gt;
+			SELECT idcontrato, numero||' ('||nomefantasia||')' 
+			FROM contratos ct join clientes cl on cl.idcliente = ct.idcliente and (ct.deleted is null OR ct.deleted = 'N' OR ct.deleted = 'n') 
+								   AND (ct.datafimcontrato IS NULL OR ct.datafimcontrato &gt;= CURRENT_TIMESTAMP) 
+								   AND (ct.situacao = 'A' ) 
+			ORDER BY 2
+		&lt;/OPTIONS&gt;
+	&lt;/PARAM&gt;
+&lt;/PARAMETERS&gt;</parametros><sql></sql><script>var importNames = JavaImporter();
+importNames.importPackage(Packages.java.util);
+importNames.importPackage(Packages.java.lang);
+importNames.importPackage(Packages.br.com.centralit.citcorpore.negocio);
+importNames.importPackage(Packages.br.com.centralit.citcorpore.integracao);
+importNames.importPackage(Packages.br.com.centralit.citcorpore.bean);
+importNames.importPackage(Packages.br.com.centralit.citcorpore.bpm.negocio);
+importNames.importPackage(Packages.br.com.centralit.citcorpore.util);
+importNames.importPackage(Packages.br.com.citframework.util);
+importNames.importPackage(Packages.br.com.citframework.comparacao);
+importNames.importPackage(Packages.br.com.citframework.integracao);
+importNames.importPackage(Packages.com.google.gson);
+importNames.importPackage(Packages.java.text);
+importNames.importPackage(Packages.br.com.centralit.citsmart.rest.v3.util);
+var print = java.lang.System.out;
+
+var pRequestId = hashParametros.get("PARAM.requestId")=="" ? -1 : importNames.Integer.parseInt(hashParametros.get("PARAM.requestId"));
+var pTypeDate = hashParametros.get("PARAM.typeDate")=="" ? -1 : importNames.Integer.parseInt(hashParametros.get("PARAM.typeDate"));
+var pStartDate = importNames.UtilDatas.getTimeStampInicioPeriodo(hashParametros.get("PARAM.startDate"));
+var pEndDate = importNames.UtilDatas.getTimeStampFimPeriodo(hashParametros.get("PARAM.endDate"));
+var pContractId = hashParametros.get("PARAM.contractId")=="" ? -1 : importNames.Integer.parseInt(hashParametros.get("PARAM.contractId"));
+
+function twoDigits(number) {
+	if (number!=null) {
+	    return (number &lt; 10 ? '0' : '') + number;
+	} else {
+		return "00";
+	}
+}
+
+formataHHMM = function(hora,minuto){
+	var texto = new importNames.StringBuilder();
+ 
+	if (hora!=null) {
+		texto.append(twoDigits(hora));
+	} else {
+		texto.append("00");
+	}
+	
+	texto.append(":");
+	
+	if (minuto!=null) {
+		texto.append(twoDigits(minuto));
+	} else {
+		texto.append("00");
+	}
+	return texto.toString();
+}
+
+internacionalizar = function(chave){
+	return importNames.UtilHTML.encodeHTML(importNames.UtilI18N.internacionaliza(httpRequest, chave));
+}
+
+obterChaveEnumerado = function(id){
+	return importNames.Enumerados.ServiceRequestStatus.getChaveFromId(id);
+}
+
+obterSituacaoSolicitacao = function(id){
+	return internacionalizar(obterChaveEnumerado(id));
+}
+
+obterChaveEnumeradoTipoDemandaServico = function(classificacao){
+	return importNames.Enumerados.TipoDemandaServico.getKeyFromClassification(classificacao);
+}
+
+returnTypeRequest = function(classificacao){
+	return internacionalizar(obterChaveEnumeradoTipoDemandaServico(classificacao));
+}
+
+findContractIdentifier = function(id){
+	var identifier = "";
+	var contratoDao = new importNames.ContratoDao();
+	var contratoDto = contratoDao.restoreWidthIdentifier(id);
+	if (contratoDto != null) {
+		contratoDto.montaIdentificador();
+		identifier = contratoDto.getIdentificador();
+	}
+	return identifier;
+}
+
+formataTimeStamp = function(dataHora){
+	if (dataHora!=null){
+		return importNames.UtilDatas.formatTimestamp(dataHora);
+	} else {
+		return " ";
+	}
+}
+
+formataData = function(dataHora){
+	if (dataHora!=null){
+		return importNames.UtilDate.formatarData(dataHora);
+	} else {
+		return " ";
+	}
+}
+
+stringEmptyForNull = function(information){
+	if (information!=null){
+		return information;
+	} else {
+		return " ";
+	}
+}
+
+intToString = function(val){
+	return stringEmptyForNull(val).toString();
+}
+
+processDateField = function(typeDate){
+	var fieldName = "datahorasolicitacao";
+	if (typeDate &gt; 0){
+		fieldName = "datahorafim";
+	}
+	return fieldName;
+}
+
+processDescriptionDateField = function(typeDate){
+	var fieldName = "expression.function.serviceRequest.getRequestTimestamp";
+	if (typeDate &gt; 0){
+		fieldName = "citcorpore.comum.dataEncerramento";
+	}
+	return internacionalizar(fieldName);
+}
+
+sqlMain = function(sql, requestId, typeDate, startDate, endDate, contractId, pStatus, paramsUtilizadosNoSQL){
+	sql.append("select ss.idsolicitacaoservico, sc.idcontrato, sc.idservico, ss.idtipodemandaservico, ")
+			  	.append("ss.idstatus, ss.idsolicitante, ss.datahorasolicitacao, ss.prazohh, ss.prazomm, ")
+			  	.append("ss.datahoralimite, ss.datahorafim, ")
+			  	.append("sum(case when o.tempogastohora is null then 0 else o.tempogastohora end) tempoatendimento ")
+		.append("from ocorrenciasolicitacao o join solicitacaoservico ss on ss.idsolicitacaoservico = o.idsolicitacaoservico ")
+		.append("join servicocontrato sc on ss.idservicocontrato = sc.idservicocontrato ")
+		.append("where o.idoccurrencecategory = ? ");
+	paramsUtilizadosNoSQL.add(importNames.Enumerados.OccurrenceCategory.TIMESHEET.getId());
+	if (requestId != null &amp;&amp; requestId &gt; 0) {
+		sql.append("and ss.idsolicitacaoservico = ? ");
+		paramsUtilizadosNoSQL.add(requestId);
+	}
+	if ((startDate != null) &amp;&amp; (endDate != null)){
+		sql.append("and ss.").append(processDateField(typeDate)).append(" between ? and ? ");
+		paramsUtilizadosNoSQL.add(startDate);
+		paramsUtilizadosNoSQL.add(endDate);
+	}
+  	if (contractId != null &amp;&amp; contractId &gt; 0){
+  		sql.append("and sc.idcontrato = ? ");
+  		paramsUtilizadosNoSQL.add(contractId);
+  	}
+	if (pStatus != null){
+		switch (pStatus) {
+		    case "A":
+		        sql.append("and ss.idstatus in (1,2,4,5,7) ");
+		        break;
+			case "F":
+		        sql.append("and ss.idstatus = 6 ");
+		        break;
+			case "C":
+		        sql.append("and ss.idstatus = 3 ");
+		        break;
+		}
+	}
+	sql.append("group by ss.idsolicitacaoservico, sc.idcontrato, sc.idservico, ss.idtipodemandaservico, ss.idstatus, ss.idsolicitante, ")
+	 	.append("ss.datahorasolicitacao, ss.prazohh, ss.prazomm, ss.datahoralimite, ss.datahorafim");
+}
+
+sqlTimeByTicket = function(requestId){
+	var resultado = null
+	var paramsUtilizadosNoSQL = new importNames.ArrayList();
+	var sql = new importNames.StringBuilder();
+
+	sql.append("	SELECT 	");
+	sql.append("		u.nome,	");
+	sql.append("		os.dataregistro,	");
+	sql.append("		SUM(os.tempogastohora) 	");
+	sql.append("	FROM 	");
+	sql.append("		ocorrenciasolicitacao os	");
+	sql.append("		INNER JOIN solicitacaoservico ss ON ss.idsolicitacaoservico = os.idsolicitacaoservico	");
+	sql.append("		INNER JOIN servicocontrato sc ON ss.idservicocontrato = sc.idservicocontrato	");
+	sql.append("		INNER JOIN usuario u ON os.registradoporidusuario = u.idusuario	");
+	sql.append("	WHERE	");
+	sql.append("		os.idoccurrencecategory = ").append(importNames.Enumerados.OccurrenceCategory.TIMESHEET.getId()).append("	");
+	sql.append("		AND ss.idsolicitacaoservico = ? 	");
+
+  	paramsUtilizadosNoSQL.add(requestId);
+  
+	if ((pStartDate != null) &amp;&amp; (pEndDate != null)){
+	  if(pTypeDate == 1) {
+	    sql.append("		AND ss.datahorafim BETWEEN ? AND ? 	");
+	  } else {
+	    sql.append("		AND ss.datahorasolicitacao BETWEEN ? AND ? 	");
+	  }
+	  paramsUtilizadosNoSQL.add(pStartDate);
+	  paramsUtilizadosNoSQL.add(pEndDate);
+	}
+  	
+  	if (pContractId != null &amp;&amp; pContractId &gt; 0){
+  		sql.append("and sc.idcontrato = ? ");
+  		paramsUtilizadosNoSQL.add(pContractId);
+  	}
+  	
+	sql.append("	GROUP BY 	");
+	sql.append("		u.nome, os.dataregistro	");
+
+	resultado = jdbcEngine.execSQL(sql.toString(), paramsUtilizadosNoSQL.toArray(), 0);
+	return resultado;
+}
+
+sqlSolicitacoes = function(requestId, typeDate, startDate, endDate, contractId, paramsUtilizadosNoSQL){
+    var sql = new importNames.StringBuilder();
+  	sql.append("select sot.idcontrato, sot.idsolicitacaoservico, tds.classificacao tipo, snegocio.nomeservico, ativ.nomeservico nomeatividade, ")
+  				.append("sot.idstatus, solicitante.nome nomesolicitante, sot.datahorasolicitacao, sot.datahoralimite, sot.datahorafim, sot.prazohh, sot.prazomm, ")
+  				.append("sot.tempoatendimento ")
+  		.append("from ( ");
+	sqlMain(sql, requestId, typeDate, startDate, endDate, contractId, null, paramsUtilizadosNoSQL);
+		sql.append(") sot join servico ativ on sot.idservico = ativ.idservico ")
+				 .append("join servicoautorelacionamento sauto on sot.idservico = sauto.idservico ")
+				 .append("join servico snegocio on sauto.idservicorelacionado = snegocio.idservico ")
+				 .append("join tipodemandaservico tds on sot.idtipodemandaservico = tds.idtipodemandaservico ")
+				 .append("join empregados solicitante on sot.idsolicitante = solicitante.idempregado ")
+  	.append("order by sot.idcontrato, sot.idsolicitacaoservico");
+	return sql.toString();
+}
+
+listSolicitacoes = function(requestId, typeDate, startDate, endDate, contractId) {
+	var paramsUtilizadosNoSQL = new importNames.ArrayList();
+	return jdbcEngine.execSQL(sqlSolicitacoes(requestId, typeDate, startDate, endDate, contractId, paramsUtilizadosNoSQL), paramsUtilizadosNoSQL.toArray(), 0);
+}
+
+sqlTotalRequests = function(requestId, typeDate, startDate, endDate, actualContract, paramsUtilizadosNoSQL){
+    var sql = new importNames.StringBuilder();
+  	sql.append("select qtdeEncerradas, tempoEncerradas, ")
+				.append("qtdeAbertas, tempoAbertas, ")
+				.append("qtdeCanceladas, tempoCanceladas ")
+	   .append("from (select ? idcontrato, count(distinct(tab.idsolicitacaoservico)) qtdeEncerradas,")
+					.append("sum(tempoatendimento) tempoEncerradas ")
+			   .append("from (");
+	paramsUtilizadosNoSQL.add(actualContract);
+							  sqlMain(sql, requestId, typeDate, startDate, endDate, actualContract, "F", paramsUtilizadosNoSQL);
+				  sql.append(") tab ")
+			.append(") fech ")
+			.append("join (select ? idcontrato, count(distinct(tab.idsolicitacaoservico)) qtdeAbertas,")
+					.append("sum(tempoatendimento) tempoAbertas ")
+			   .append("from (");
+	paramsUtilizadosNoSQL.add(actualContract);
+							  sqlMain(sql, requestId, typeDate, startDate, endDate, actualContract, "A", paramsUtilizadosNoSQL);
+				  sql.append(") tab ")
+			.append(") reab on fech.idcontrato = reab.idcontrato ")
+			.append("join (select ? idcontrato, count(distinct(tab.idsolicitacaoservico)) qtdeCanceladas,")
+					.append("sum(tempoatendimento) tempoCanceladas ")
+			   .append("from (");
+	paramsUtilizadosNoSQL.add(actualContract);
+							  sqlMain(sql, requestId, typeDate, startDate, endDate, actualContract, "C", paramsUtilizadosNoSQL);
+				  sql.append(") tab ")
+			.append(") canc on fech.idcontrato = canc.idcontrato");
+	return sql.toString();
+}
+
+executeTotalRequest = function(requestId, typeDate, startDate, endDate, actualContract){
+	var total = [0,"00:00:00",0,"00:00:00",0,"00:00:00"];
+	var paramsUtilizadosNoSQL = new importNames.ArrayList();
+	var listTotal = jdbcEngine.execSQL(sqlTotalRequests(requestId, typeDate, startDate, endDate, actualContract, paramsUtilizadosNoSQL), paramsUtilizadosNoSQL.toArray(), 0);
+	if (listTotal &amp;&amp; !listTotal.isEmpty()){
+		total = listTotal.get(0);
+	}
+	return total;
+}
+
+buildStyleCSS = function(relatorio){
+	relatorio.append("&lt;style&gt; ")
+				.append("th.header-title { ")
+				.append("	text-align: center; font-size: 16px; ")
+				.append("} ")
+				.append("span.header-title-bold { ")
+				.append("	font-weight: bold; ")
+				.append("} ")
+				.append("span.header-title-normal { ")
+				.append("	font-weight: normal; ")
+				.append("} ")
+				.append("td#tt-head-contrato {} ")
+				.append("#tickets { ")
+				.append("	border:none; ")
+				.append("	background-color: #fdfdfd; ")
+				.append("} ")
+				.append("th#tt-head-lista { ")
+				.append("	padding-top: 15px; ")
+				.append("} ")
+				.append(".textRight {text-align: right;}")
+				.append(".textLeft {text-align: left; font-weight: bold;}")
+		.append("&lt;/style&gt; ");
+}
+
+buildReportHeader = function(relatorio, vReportTitle, typeDate, startDate, endDate, contractId){
+	relatorio.append("&lt;!DOCTYPE html&gt;")
+			 .append("&lt;html&gt;")
+			 .append("&lt;head&gt;")
+					.append("&lt;script type='text/javascript'&gt; ")
+							.append("$(document).ready(function() {")
+									.append("var selectedContract = document.getElementById('PARAM.contractId').selectedIndex;")
+									.append("document.getElementById('spanContract').textContent = document.getElementById('PARAM.contractId').options[selectedContract].text;")
+							.append("});")
+      						.append("function onTicketClick(idTicket, that) {")
+									.append("if(that.nextElementSibling.classList.contains('hide')) {")
+									.append("	that.nextElementSibling.classList.remove('hide')")
+									.append("} else {")
+									.append("	that.nextElementSibling.classList.add('hide')")
+									.append("}")
+							.append("};")    
+					.append("&lt;/script&gt;");
+	buildStyleCSS(relatorio);
+	relatorio.append("&lt;/head&gt;")
+			 .append("&lt;body&gt;")
+    .append("&lt;div id='table_wrapper'&gt;")
+		.append("&lt;table width='100%' style='border: none; backgroud-color: #fbfbfb;'&gt;")
+			.append("&lt;tr&gt;")
+				.append("&lt;th colspan='12' rowspan='2' style='text-align: center'&gt;&lt;h4&gt;").append(vReportTitle).append("&lt;/h4&gt;&lt;/th&gt;")
+			.append("&lt;/tr&gt;")
+		.append("&lt;/table&gt;")
+		.append("&lt;/br&gt;")
+		.append("&lt;table&gt;")
+			.append("&lt;tr&gt;&lt;td style='word-break: break-word; max-width: 20%;'&gt;&lt;b&gt;").append(internacionalizar("citcorpore.comum.contrato")).append(": &lt;span id='spanContract'&gt;&lt;/span&gt;&lt;/b&gt;&lt;/td&gt;&lt;/tr&gt;");
+	if (startDate != null) {
+		relatorio.append("&lt;tr&gt;&lt;td&gt;&lt;b&gt;").append(internacionalizar("citcorpore.texto.periodo")).append(" - ").append(processDescriptionDateField(typeDate)).append(": ").append(formataData(startDate)).append(" ").append(internacionalizar("questionario.ate")).append(" ").append(formataData(endDate)).append("&lt;/b&gt;&lt;/td&gt;&lt;/tr&gt;");
+	}
+		relatorio.append("&lt;/table&gt;")
+		.append("&lt;br&gt;");
+}
+
+buildTotalHeader = function(relatorio, pRequestId, typeDate, startDate, endDate, actualContract){
+	var resultTotal = executeTotalRequest(pRequestId, typeDate, startDate, endDate, actualContract);
+	relatorio.append("&lt;br&gt;")
+		   .append("&lt;table class='table' id='tickets''&gt;")
+				.append("&lt;thead&gt;")
+						.append("&lt;tr&gt;")
+							.append("&lt;th id='tt-head-contrato' class='header-title' colspan='12'&gt;&lt;span id='tt-head-contrato-title' class='header-title-bold'&gt;").append(internacionalizar("citcorpore.comum.contrato")).append(": &lt;/span&gt;&lt;span id='tt-head-contrato-value' class='header-title-normal'&gt;").append(findContractIdentifier(actualContract)).append("&lt;/span&gt;&lt;/td&gt;")
+						.append("&lt;/tr&gt;")
+						.append("&lt;tr&gt;")
+							.append("&lt;th&gt;").append(internacionalizar("gerenciamentoDeEventos.solicitacaoServico")).append("&lt;/th&gt;")
+							.append("&lt;th colspan='2'&gt;").append(internacionalizar("citcorpore.comum.quantidade")).append("&lt;/th&gt;")
+							.append("&lt;th colspan='2'&gt;").append(internacionalizar("tempoAtendimento.descTempoAtendimento")).append("&lt;/th&gt;")
+      						.append("&lt;th colspan='8'&gt;&lt;/th&gt;")
+						.append("&lt;/tr&gt;")
+				.append("&lt;/thead&gt;")
+				.append("&lt;tbody&gt;")
+						.append("&lt;tr&gt;")
+							.append("&lt;th&gt;").append(internacionalizar("smartReport.encerradas")).append("&lt;/th&gt;")
+							.append("&lt;td colspan='2'&gt;").append(intToString(resultTotal[0])).append("&lt;/td&gt;")
+							.append("&lt;td colspan='2'&gt;").append(stringEmptyForNull(resultTotal[1])).append("&lt;/td&gt;")
+      						.append("&lt;th colspan='8'&gt;&lt;/th&gt;")
+						.append("&lt;/tr&gt;")
+						.append("&lt;tr&gt;")
+							.append("&lt;th&gt;").append(internacionalizar("abertas")).append("&lt;/th&gt;")
+							.append("&lt;td colspan='2'&gt;").append(intToString(resultTotal[2])).append("&lt;/td&gt;")
+							.append("&lt;td colspan='2'&gt;").append(stringEmptyForNull(resultTotal[3])).append("&lt;/td&gt;")
+      						.append("&lt;th colspan='8'&gt;&lt;/th&gt;")
+						.append("&lt;/tr&gt;")
+						.append("&lt;tr&gt;")
+							.append("&lt;th&gt;").append(internacionalizar("citcorpore.comum.canceladas")).append("&lt;/th&gt;")
+							.append("&lt;td colspan='2'&gt;").append(intToString(resultTotal[4])).append("&lt;/td&gt;")
+							.append("&lt;td colspan='2'&gt;").append(stringEmptyForNull(resultTotal[5])).append("&lt;/td&gt;")
+      						.append("&lt;th colspan='8'&gt;&lt;/th&gt;")
+						.append("&lt;/tr&gt;")
+				.append("&lt;/tbody&gt;")
+				.append("&lt;thead&gt;")
+							.append("&lt;th id='tt-head-lista' class='header-title' colspan='12'&gt;").append(internacionalizar("smartReport.listaDeSolicitacoes")).append("&lt;/th&gt;")
+						.append("&lt;/tr&gt;")
+						.append("&lt;tr&gt;")
+							.append("&lt;th&gt;").append(internacionalizar("gerenciamentoDeEventos.solicitacaoServico")).append("&lt;/th&gt;")
+							.append("&lt;th&gt;").append(internacionalizar("solicitacaoServico.tipo")).append("&lt;/th&gt;")
+							.append("&lt;th&gt;").append(internacionalizar("servico.servico")).append("&lt;/th&gt;")
+							.append("&lt;th&gt;").append(internacionalizar("citcorpore.comum.atividade")).append("&lt;/th&gt;")
+							.append("&lt;th&gt;").append(internacionalizar("citcorpore.comum.status")).append("&lt;/th&gt;")
+							.append("&lt;th&gt;").append(internacionalizar("solicitacaoServico.solicitante")).append("&lt;/th&gt;")
+							.append("&lt;th&gt;").append(internacionalizar("expression.function.serviceRequest.getRequestTimestamp")).append("&lt;/th&gt;")
+							.append("&lt;th&gt;").append(internacionalizar("solicitacaoServico.dataHoraLimite")).append("&lt;/th&gt;")
+							.append("&lt;th&gt;").append(internacionalizar("citcorpore.comum.dataEncerramento")).append("&lt;/th&gt;")
+							.append("&lt;th&gt;").append(internacionalizar("citcorporeRelatorio.comum.sla")).append("&lt;/th&gt;")
+							.append("&lt;th&gt;").append(internacionalizar("tempoAtendimento.descTempoAtendimento")).append("&lt;/th&gt;")
+						.append("&lt;/tr&gt;")
+				.append("&lt;/thead&gt;")
+				.append("&lt;tbody&gt;")
+      			.append("&lt;br&gt;");
+}
+
+buildEndOfTotalHeader = function(relatorio,actualContract){
+	if (actualContract&gt;0) {
+		relatorio.append("&lt;/tbody&gt; ").append("&lt;/table&gt;");
+	}
+}
+
+buildRecordReport = function(relatorio, registro){
+	relatorio.append("&lt;tr class='trMain' onclick='onTicketClick("+intToString(registro[1])+", this)' style='cursor:pointer'&gt;")
+						.append("&lt;td&gt;").append(intToString(registro[1])).append("&lt;/td&gt;")
+						.append("&lt;td&gt;").append(stringEmptyForNull(returnTypeRequest(registro[2]))).append("&lt;/td&gt;")
+						.append("&lt;td&gt;").append(stringEmptyForNull(registro[3])).append("&lt;/td&gt;")
+						.append("&lt;td&gt;").append(stringEmptyForNull(registro[4])).append("&lt;/td&gt;")
+						.append("&lt;td&gt;").append(stringEmptyForNull(obterSituacaoSolicitacao(parseInt(registro[5])))).append("&lt;/td&gt;")
+						.append("&lt;td&gt;").append(stringEmptyForNull(registro[6])).append("&lt;/td&gt;")
+						.append("&lt;td&gt;").append(formataTimeStamp(registro[7])).append("&lt;/td&gt;")
+						.append("&lt;td&gt;").append(formataTimeStamp(registro[8])).append("&lt;/td&gt;")
+						.append("&lt;td&gt;").append(formataTimeStamp(registro[9])).append("&lt;/td&gt;")
+						.append("&lt;td&gt;").append(formataHHMM(registro[10],registro[11])).append("&lt;/td&gt;")
+						.append("&lt;td&gt;").append(stringEmptyForNull(registro[12])).append("&lt;/td&gt;")
+			 .append("&lt;/tr&gt;");
+  
+  var listByTicket = sqlTimeByTicket(registro[1]);
+  
+  if((listByTicket != null) &amp;&amp; (listByTicket.size() &gt; 0)) {
+  	var registroByTicket = null;
+    var qtdTickets = listByTicket.size();
+    relatorio.append("&lt;tr class='trSub hide'&gt;")
+    			.append("&lt;td colspan='2'&gt;")
+    			.append("&lt;td colspan='6'&gt;")
+    				.append("&lt;table class='table table_sub'&gt;");
+      
+  	for (var itByTicket = listByTicket.iterator(); itByTicket.hasNext();) {
+      	registroByTicket = itByTicket.next();
+      	    	
+      			relatorio.append("&lt;tr&gt;")
+    				relatorio.append("&lt;td&gt;").append(registroByTicket[0]).append("&lt;/td&gt;")
+    				relatorio.append("&lt;td&gt;").append(formataData(registroByTicket[1])).append("&lt;/td&gt;")
+    				relatorio.append("&lt;td&gt;").append(registroByTicket[2]).append("&lt;/td&gt;")
+    			relatorio.append("&lt;/tr&gt;")
+       firstRegister = false;
+    }
+    
+    
+    		relatorio.append("&lt;/table&gt;")
+    			.append("&lt;/td&gt;")
+              	.append("&lt;td colspan='4'&gt;")
+    		.append("&lt;/tr&gt;");
+  }
+}
+
+buildEmptyReportMessage = function(relatorio){
+	relatorio.append("&lt;br&gt;&lt;table width='100%'&gt;")
+				.append("&lt;tr&gt;")
+				.append("&lt;td style='border-left:1px solid #ddd !important'&gt;")
+				.append("&lt;b&gt;").append(internacionalizar("smartReport.aConsultaNaoRetornouResultado")).append("&lt;/b&gt;")
+				.append("&lt;/td&gt;")
+				.append("&lt;/tr&gt;")
+				.append("&lt;/table&gt;");
+}
+
+buildFooterReport = function(relatorio){
+	relatorio.append("&lt;/tbody&gt; ")
+		 .append("&lt;/table&gt;")
+		 .append("&lt;br&gt;");
+}
+
+buildEndOfReport = function(relatorio){
+	relatorio.append("&lt;br&gt;")
+		.append("&lt;/div&gt;")
+      .append("&lt;/body&gt;")
+	.append("&lt;/html&gt;");
+}
+
+construirRelatorio = function(){
+    var consulta = listSolicitacoes(pRequestId, pTypeDate, pStartDate, pEndDate, pContractId);
+	var registro = null;
+	var relatorio = new importNames.StringBuilder();
+	var actualContract = 0;
+    buildReportHeader(relatorio,internacionalizar("smartReport.relatorioPorTicketAtendimento"), pTypeDate, pStartDate, pEndDate, pContractId);
+    if ((consulta != null) &amp;&amp; (consulta.size() &gt; 0)) {
+        for (var it = consulta.iterator(); it.hasNext();) {
+            registro = it.next();
+			if(actualContract != registro[0]){
+				buildEndOfTotalHeader(relatorio,actualContract);
+				actualContract = parseInt(registro[0]);
+				buildTotalHeader(relatorio, pRequestId, pTypeDate, pStartDate, pEndDate, actualContract);
+			}
+          	buildRecordReport(relatorio, registro);
+        }
+      	buildFooterReport(relatorio);
+    } else {
+        buildEmptyReportMessage(relatorio);
+    }
+    buildEndOfReport(relatorio);
+    return relatorio.toString();
+}
+
+HTML_RESULT.append(construirRelatorio());</script><jsp></jsp><template></template><tipoExibicao>G</tipoExibicao><moduloExibicao>GC,GIR,GIRG,GL,GM,GP</moduloExibicao></br.com.centralit.citcorpore.bean.SmartReportDTO>

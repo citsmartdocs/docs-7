@@ -1,0 +1,282 @@
+<?xml version="1.0" ?><br.com.centralit.citcorpore.bean.SmartReportDTO><identificacao>Tickets - Tiempo gastado por tecnico</identificacao><descricao>Tickets - Tempo gasto por técnico</descricao><idCategoria>1</idCategoria><tipoConsulta>2</tipoConsulta><tipoRelatorio>7</tipoRelatorio><parametros>&lt;PARAMETERS&gt;
+  	&lt;PARAM name='typeDate_ticketTime2' type='java.lang.Integer' typeHTML='select' value='1' description='citcorpore.texto.periodo' fix='false' mandatory='false' reload='true' onload='true' default='1'&gt;
+	    &lt;OPTION value='0' text='expression.function.serviceRequest.getRequestTimestamp'/&gt;
+	    &lt;OPTION value='1' text='citcorpore.comum.dataEncerramento'/&gt;
+ 	&lt;/PARAM&gt;
+	&lt;PARAM name='startDate_ticketTime2' type='java.sql.Date' size='10' value='' description='citcorpore.comum.datainicio' fix='false' mandatory='false' default='{MONTH_AGO}'/&gt;
+	&lt;PARAM name='endDate_ticketTime2' type='java.sql.Date' size='10'value='' description='citcorpore.comum.datafim' fix='false' mandatory='false' default='{TODAY}'/&gt;
+  	&lt;PARAM name="user_ticketTime2" type="java.lang.Integer" typeHTML="select" description="citcorpore.comum.tecnico" mandatory="true" fix="false" size="" value="-1" default="-1"&gt;
+    	&lt;OPTION value="-1" text="citcorpore.comum.todos"/&gt;
+      	&lt;OPTIONS type='SQL' onload='true'&gt;
+            SELECT idusuario, nome
+            FROM usuario
+            WHERE status = 'A' AND (guest is null OR guest = 'N')
+            ORDER BY 2
+		&lt;/OPTIONS&gt;
+  	&lt;/PARAM&gt;
+&lt;/PARAMETERS&gt;</parametros><sql></sql><script>var importNames = JavaImporter();
+importNames.importPackage(Packages.java.util);
+importNames.importPackage(Packages.java.lang);
+importNames.importPackage(Packages.br.com.centralit.citcorpore.negocio);
+importNames.importPackage(Packages.br.com.centralit.citcorpore.integracao);
+importNames.importPackage(Packages.br.com.centralit.citcorpore.bean);
+importNames.importPackage(Packages.br.com.centralit.citcorpore.bpm.negocio);
+importNames.importPackage(Packages.br.com.centralit.citcorpore.util);
+importNames.importPackage(Packages.br.com.citframework.util);
+importNames.importPackage(Packages.br.com.citframework.comparacao);
+importNames.importPackage(Packages.br.com.citframework.integracao);
+importNames.importPackage(Packages.com.google.gson);
+importNames.importPackage(Packages.java.text);
+importNames.importPackage(Packages.br.com.centralit.citsmart.rest.v3.util);
+
+var typeDate_ticketTime2 = hashParametros.get("PARAM.typeDate_ticketTime2")=="" ? -1 : importNames.Integer.parseInt(hashParametros.get("PARAM.typeDate_ticketTime2"));
+var startDate_ticketTime2 = importNames.UtilDatas.getTimeStampInicioPeriodo(hashParametros.get("PARAM.startDate_ticketTime2"));
+var endDate_ticketTime2 = importNames.UtilDatas.getTimeStampFimPeriodo(hashParametros.get("PARAM.endDate_ticketTime2"));
+var user_ticketTime2 = hashParametros.get("PARAM.user_ticketTime2")=="" ? -1 : importNames.Integer.parseInt(hashParametros.get("PARAM.user_ticketTime2"));
+
+
+var print = java.lang.System.out;
+
+
+processDescriptionDateField = function(typeDate){
+	var fieldName = "expression.function.serviceRequest.getRequestTimestamp";
+	if (typeDate &gt; 0){
+		fieldName = "citcorpore.comum.dataEncerramento";
+	}
+	return internacionalizar(fieldName);
+}
+
+formataData = function(dataHora){
+	if (dataHora!=null){
+		return importNames.UtilDate.formatarData(dataHora);
+	} else {
+		return " ";
+	}
+}
+
+internacionalizar = function(chave){
+	return importNames.UtilHTML.encodeHTML(importNames.UtilI18N.internacionaliza(httpRequest, chave));
+}
+
+list = function () {
+    var resultado = null
+    var paramsUtilizadosNoSQL = new importNames.ArrayList();
+    var sql = new importNames.StringBuilder();
+  
+	sql.append("	SELECT 	");
+	sql.append("		u.idusuario,	");
+	sql.append("		COUNT(ss.idsolicitacaoservico),	");
+	sql.append("		SUM(os.tempogastohora) 	");
+	sql.append("	FROM 	");
+	sql.append("		ocorrenciasolicitacao os	");
+	sql.append("		INNER JOIN solicitacaoservico ss ON ss.idsolicitacaoservico = os.idsolicitacaoservico	");
+	sql.append("		INNER JOIN usuario u ON os.registradoporidusuario = u.idusuario	");
+	sql.append("	WHERE	");
+	sql.append("		os.idoccurrencecategory = ").append(importNames.Enumerados.OccurrenceCategory.TIMESHEET.getId()).append("	");
+    sql.append("		AND (" + user_ticketTime2 + " = -1 OR u.idusuario = " + user_ticketTime2 + ")  ");
+  	if ((startDate_ticketTime2 != null) &amp;&amp; (endDate_ticketTime2 != null)){
+      	if(typeDate_ticketTime2 == 1) {
+        	sql.append("		AND ss.datahorafim BETWEEN ? AND ? 	");
+      	} else {
+      		sql.append("		AND ss.datahorasolicitacao BETWEEN ? AND ? 	");
+      	}
+      	paramsUtilizadosNoSQL.add(startDate_ticketTime2);
+		paramsUtilizadosNoSQL.add(endDate_ticketTime2);
+    }
+  	sql.append("	GROUP BY 	");
+	sql.append("		u.idusuario	");
+
+  	resultado = jdbcEngine.execSQL(sql.toString(), paramsUtilizadosNoSQL.toArray(), 0);
+  	return resultado;
+}
+
+listByUser = function (idUsuario) {
+    var resultado = null
+    var paramsUtilizadosNoSQL = new importNames.ArrayList();
+    var sql = new importNames.StringBuilder();
+  
+		sql.append("	SELECT 	");
+	sql.append("		u.nome,	");
+	sql.append("		ss.idsolicitacaoservico,	");
+	sql.append("		SUM(os.tempogastohora) 	");
+	sql.append("	FROM 	");
+	sql.append("		ocorrenciasolicitacao os	");
+	sql.append("		INNER JOIN solicitacaoservico ss ON ss.idsolicitacaoservico = os.idsolicitacaoservico	");
+	sql.append("		INNER JOIN usuario u ON os.registradoporidusuario = u.idusuario	");
+	sql.append("	WHERE	");  
+	sql.append("		os.idoccurrencecategory = ").append(importNames.Enumerados.OccurrenceCategory.TIMESHEET.getId()).append("	");
+  	sql.append("		AND u.idusuario = ?	");
+  
+  	paramsUtilizadosNoSQL.add(idUsuario);
+  
+  	if ((startDate_ticketTime2 != null) &amp;&amp; (endDate_ticketTime2 != null)){
+      	if(typeDate_ticketTime2 == 1) {
+        	sql.append("		AND ss.datahorafim BETWEEN ? AND ? 	");
+      	} else {
+      		sql.append("		AND ss.datahorasolicitacao BETWEEN ? AND ? 	");
+      	}
+      	paramsUtilizadosNoSQL.add(startDate_ticketTime2);
+		paramsUtilizadosNoSQL.add(endDate_ticketTime2);
+    }
+	
+  	sql.append("	GROUP BY 	");
+	sql.append("		u.nome, ss.idsolicitacaoservico, os.dataregistro	");
+
+  	resultado = jdbcEngine.execSQL(sql.toString(), paramsUtilizadosNoSQL.toArray(), 0);
+  	return resultado;
+}
+
+construirRelatorio = function () {
+    var listTickets = list();
+    var registro = null;
+  	var registroGrupo = null;
+
+    var relatorio = new importNames.StringBuilder();
+
+    relatorio.append("&lt;!DOCTYPE html&gt;")
+    relatorio.append("&lt;html&gt;")
+        //Importação do JS para exportar em excel
+    relatorio.append("&lt;head&gt;")
+    relatorio.append("&lt;script type='text/javascript' src='https://www.gstatic.com/charts/loader.js'&gt;&lt;/script&gt;")
+    relatorio.append("&lt;script type='text/javascript'&gt; ")
+    relatorio.append("$(document).ready(function() {")
+   	
+   	relatorio.append("document.getElementById('spanTypeDate_ticketTime2').textContent = document.getElementById('PARAM.typeDate_ticketTime2').options[document.getElementById('PARAM.typeDate_ticketTime2').selectedIndex].text;")
+
+   	relatorio.append("document.getElementById('spanUser_ticketTime2').textContent = document.getElementById('PARAM.user_ticketTime2').options[document.getElementById('PARAM.user_ticketTime2').selectedIndex].text;")
+    
+    relatorio.append("});")
+    relatorio.append("&lt;/script&gt;")
+      
+    relatorio.append("&lt;style&gt; ");
+  	  
+  	relatorio.append("#tableFilters_eq009p {");
+    relatorio.append("  width: 100%;border: none; margin-left: 30px;");
+    relatorio.append("}");
+
+    relatorio.append("#tableFilters_eq009p td {");
+    relatorio.append("  padding: 3px;");
+    relatorio.append("}");
+  
+  	relatorio.append("#ticketsNoPrazo_eq009p {");
+    relatorio.append("  border-collapse: collapse;");
+    relatorio.append("  width: 100%;");
+    relatorio.append("}");
+	
+    relatorio.append("#ticketsNoPrazo_eq009p td, #ticketsNoPrazo_eq009p th {");
+    relatorio.append("	border: 1px solid #ddd;");
+    relatorio.append("  padding: 8px;");
+    relatorio.append("}");
+  
+  	relatorio.append("#ticketsNoPrazo_eq009p .trMain{font-weight: bold; background-color: #d0e3f13b}");
+  
+  
+  	relatorio.append("#ticketsNoPrazo_eq009p .trSub {font-style: italic;}");
+  	relatorio.append("#ticketsNoPrazo_eq009p .trFooter {font-style: bold; background-color: #dbe9f33b; text-align : right}");
+  	
+  	relatorio.append("#ticketsNoPrazo_eq009p .cell_red{color: #e22323;}");
+  	relatorio.append("#ticketsNoPrazo_eq009p .cell_green{color: #0e6d0e;}");
+
+    relatorio.append("#ticketsNoPrazo_eq009p tr:hover {background-color: #dddddd6e;}");
+
+    relatorio.append("#ticketsNoPrazo_eq009p th {");
+    relatorio.append("	padding-top: 12px;");
+    relatorio.append("  padding-bottom: 12px;");
+    relatorio.append("  text-align: left;");
+    relatorio.append("  background-color: #225b84e6;");
+    relatorio.append("  color: white;");
+    relatorio.append("}");
+
+  	relatorio.append("&lt;/style&gt; ");
+  
+    relatorio.append("&lt;/head&gt;")
+
+    relatorio.append("&lt;body&gt;")
+    relatorio.append("&lt;div id='table_wrapper_eq009p'&gt;")
+    relatorio.append("&lt;table width='100%' style='border: none'&gt;");
+    relatorio.append("		&lt;tr&gt;  ");
+    relatorio.append("			&lt;th colspan='5' rowspan='2' style='text-align: center'&gt;&lt;h4&gt;Tiempo gastado por técnico&lt;/h4&gt;&lt;/th&gt;");
+    relatorio.append("		&lt;/tr&gt; ");
+    relatorio.append("	&lt;/table&gt; ");
+    relatorio.append("	&lt;/br&gt; ");
+  	
+  	relatorio.append("&lt;table id='tableFilters'&gt;");
+  	showTime = 'display: none'
+  	if(startDate_ticketTime2 != null &amp;&amp; endDate_ticketTime2 != null)  {
+      	showTime = '';
+    }
+  	relatorio.append("	&lt;tr style='"+showTime+"'&gt;&lt;td&gt;&lt;b&gt;&lt;span id='spanTypeDate_ticketTime2'&gt;&lt;/span&gt;: "+formataData(startDate_ticketTime2)+" - "+formataData(endDate_ticketTime2)+" &lt;/b&gt; &lt;/td&gt;&lt;/tr&gt;  ");
+  	
+  	showUser = 'display: none'
+  	if(user_ticketTime2 != null &amp;&amp; user_ticketTime2 != -1)  {
+      	showUser = '';
+    }
+  	relatorio.append("	&lt;tr style='"+showUser+"'&gt;&lt;td&gt;&lt;b&gt;"+internacionalizar("citcorpore.comum.tecnico")+": &lt;span id='spanUser_ticketTime2'&gt;&lt;/span&gt; &lt;/b&gt; &lt;/td&gt;&lt;/tr&gt;  ");
+    
+  relatorio.append("&lt;/table&gt;");
+    //Fim cabeçalho
+
+	relatorio.append("&lt;br&gt;")
+        .append("&lt;table id='ticketsNoPrazo_eq009p'&gt;")
+
+    if ((listTickets != null) &amp;&amp; (listTickets.size() &gt; 0)) {
+
+		relatorio.append("&lt;thead&gt; ")
+      	relatorio.append("	&lt;tr&gt; ")
+        relatorio.append("		&lt;th class=''&gt;Técnico&lt;/th&gt;")
+        relatorio.append("		&lt;th class=''&gt;Ticket&lt;/th&gt;")
+        relatorio.append("		&lt;th class=''&gt;Tiempo Gasto&lt;/th&gt;")
+        relatorio.append("	&lt;/tr&gt;");
+      	relatorio.append("&lt;/thead&gt; ")
+
+		print.println("---- Contruindo Relatório ");
+
+		relatorio.append("&lt;tbody&gt; ")
+        for (var it2 = listTickets.iterator(); it2.hasNext();) {
+            registro = it2.next();
+              
+            var listTicketsbyUser = listByUser(registro[0]);
+          
+          	if((listTicketsbyUser != null) &amp;&amp; (listTicketsbyUser.size() &gt; 0)) {
+              	var firstRegister = true;
+              	var qtdTickets = listTicketsbyUser.size();
+                for (var itGrupo = listTicketsbyUser.iterator(); itGrupo.hasNext();) {
+                    registroGrupo = itGrupo.next();
+                    relatorio.append("&lt;tr class='trMain'&gt; ")
+                    if(firstRegister) {
+                    	relatorio.append("	&lt;td rowspan='"+qtdTickets+"'&gt;" + registroGrupo[0] + "&lt;/td&gt;")
+                    }
+                    relatorio.append("	&lt;td&gt;" + registroGrupo[1] + "&lt;/td&gt;")
+                    relatorio.append("	&lt;td&gt;" + registroGrupo[2] + "&lt;/td&gt;")
+                    relatorio.append("&lt;/tr&gt; ")    
+                    firstRegister = false;
+                }
+              	relatorio.append("&lt;tr class='trSub trFooter'&gt; ")
+                relatorio.append("	&lt;td&gt;Total&lt;/td&gt;")
+                relatorio.append("	&lt;td&gt;" + qtdTickets + "&lt;/td&gt;")
+                relatorio.append("	&lt;td&gt;" + registro[2] + "&lt;/td&gt;")
+                relatorio.append("&lt;/tr&gt; ")   
+            }
+        }
+      	relatorio.append("&lt;/tbody&gt; ")
+      
+
+    } else {
+        relatorio.append("&lt;br&gt;&lt;table width='100%'&gt;")
+            .append("&lt;tr&gt; ")
+            .append("&lt;td style='border-left:1px solid #ddd !important'&gt;")
+            .append("&lt;b&gt;La consulta no devolvió resultado&lt;/b&gt;")
+            .append("&lt;/td&gt;")
+            .append("&lt;/tr&gt;")
+            .append("&lt;/table&gt;");
+    }
+
+    relatorio.append("&lt;/table&gt;").append("&lt;br&gt;")
+        .append("&lt;/div&gt;")
+        .append("&lt;/body&gt;")
+        .append("&lt;/html&gt;");
+
+    return relatorio.toString();
+}
+
+HTML_RESULT.append(construirRelatorio());</script><jsp></jsp><template></template><tipoExibicao>N</tipoExibicao></br.com.centralit.citcorpore.bean.SmartReportDTO>

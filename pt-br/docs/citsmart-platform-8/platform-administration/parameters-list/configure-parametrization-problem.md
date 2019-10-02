@@ -1,0 +1,42 @@
+title: Configurar parametrização - problema
+Description: Permite a execução/uso deste processo, podendo ser possível definir o nome do fluxo padrão para problema, definir se serão notificados o responsável e grupo executor quando o prazo para contornar/solucionar o problema houver expirado, dentre de outras ações viáveis.
+# Configurar parametrização - problema
+
+O gerenciamento de problemas controla o ciclo de vida de todos problemas desde a
+primeira identificação, passando pela investigação, documentação e eventual
+remoção. A parametrização de "Problema" deve ser realizada para permitir a
+execução/uso deste processo, podendo ser possível definir o nome do fluxo padrão
+para problema, definir se serão notificados o responsável e grupo executor
+quando o prazo para contornar/solucionar o problema houver expirado, dentre
+outras ações.
+
+Procedimento
+------------
+
+1.  Acessar a funcionalidade através da navegação no menu principal
+    Parametrização \> Gerência de Problema;
+
+2.  Definir os valores dos parâmetros (atributos);
+
+3.  Clicar no botão "Gravar" para efetuar a operação;
+
+4.  A lista abaixo representa os parâmetros do "Problema" e a finalidade de cada
+    um deles:
+
+|  #  |                                                                       Nome                                                                       |  Valores possíveis  |                                                                                                                                                                                                             Finalidade                                                                                                                                                                                                             |                                              Orientações complementares                                              |
+|:---:|:------------------------------------------------------------------------------------------------------------------------------------------------:|:-------------------:|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|:--------------------------------------------------------------------------------------------------------------------:|
+| 123 |                                                        Nome do fluxo padrão para problema                                                        |  Ex: ProblemaPadrao |                                                                                              Informar o nome do fluxo padrão para Problema. Caso não seja informado um fluxo para o problema, será estabelecido pelo sistema o fluxo (conforme informado no valor do parâmetro). Esse fluxo é definido na tela de “Desenho de Fluxo”.                                                                                              |                                                     Não se aplica                                                    |
+| 124 |                             ID do modelo de e-mail que será enviado para o solicitante quando um problema for criado                             |                     |                    Informar o número de identificação (ID) do modelo de e-mail de notificação de criação do problema. Ao registrar um problema na tela de “Registro de Problemas” será utilizado para o envio da notificação de criação do problema o modelo de e-mail definido. Onde essa notificação será enviada para o solicitante. Esse ID do modelo de e-mail é cadastrado na tela de “Modelo de E-mail”.                    | Caso não informe o número de identificação (ID) do modelo de e-mail, há possiblidade de não enviar o e-mail correto. |
+| 125 |                        ID do modelo de e-mail que será enviado para o solicitante quando um problema estiver em andamento                        |                     |                    Informar o número de identificação (ID) do modelo de e-mail de notificação do andamento do problema. Ao realizar a execução do problema na tela de “Problema” será utilizado para o envio da notificação do andamento do problema o modelo de e-mail definido. Onde essa notificação será enviada para o solicitante. Esse ID do modelo de e-mail é cadastrado na tela de “Modelo de E-mail”.                   | Caso não informe o número de identificação (ID) do modelo de e-mail, há possiblidade de não enviar o e-mail correto. |
+| 126 |                           ID do modelo de e-mail que será enviado para o solicitante quando um problema for finalizado                           |                     |                       Informar o número de identificação (ID) do modelo de e-mail de notificação de finalização do problema. Ao finalizar o problema na tela de “Problema” será utilizado para o envio da notificação de finalização do problema o modelo de e-mail definido. Onde essa notificação será enviada para o solicitante. Esse ID do modelo de e-mail é cadastrado na tela de “Modelo de E-mail”.                       | Caso não informe o número de identificação (ID) do modelo de e-mail, há possiblidade de não enviar o e-mail correto. |
+| 127 |                              ID do modelo de e-mail que será enviado para o grupo de destino ao escalar um problema                              |                     |        Informar o número de identificação (ID) do modelo de e-mail de notificação da escalação do problema. Ao escalar um problema para o grupo na tela de “Gerenciamento de Problema”, será utilizado para o envio da notificação da escalação do problema o modelo de e-mail definido. Onde essa notificação será enviada para o grupo de destino. Esse ID do modelo de e-mail é cadastrado na tela de “Modelo de E-mail”.       | Caso não informe o número de identificação (ID) do modelo de e-mail, há possiblidade de não enviar o e-mail correto. |
+| 128 | ID do modelo de e-mail que será enviado para o responsável e grupo executor quando o prazo para contornar/solucionar um problema houver expirado |                     | Informar o número de identificação (ID) do modelo de e-mail de notificação de expiração do prazo para contornar/solucionar o problema. Quando o prazo para contornar/solucionar um problema houver expirado, será enviada para o responsável e grupo executor a notificação de expiração do prazo para contornar/solucionar o problema, conforme definido. Esse ID do modelo de e-mail é cadastrado na tela de “Modelo de E-mail”. | Caso não informe o número de identificação (ID) do modelo de e-mail, há possiblidade de não enviar o e-mail correto. |
+| 129 |      Notificar o responsável e o grupo executor ao expirar o prazo de aplicação da solução/contorno do problema (Ex: S ou N - Default: 'S')      | S ou N (Default: S) |                                                                                                                                                 Definir se serão notificados o responsável e o grupo executor quando o prazo para contornar/solucionar o problema houver expirado.                                                                                                                                                 |              Caso não informe o valor do parâmetro, será utilizado o valor padrão do sistema: “S” (Sim).             |
+| 194 |                       Habilita o escalonamento de problema definido nas regras de escalonamento? (Ex: S ou N - Default 'N')                      | S ou N (Default: N) |                                                                                                         Definir se o escalonamento de problema determinado nas regras de escalonamento será habilitado. Essa regra de escalonamento de problema é definida na tela de “Regras de Escalonamento e Notificações Automáticas”.                                                                                                        |            Caso não informe o valor do parâmetro, será estabelecido o valor padrão do sistema: “N” (Não).            |
+
+Tabela 1 - Lista de parâmetros
+
+!!! tip "About"
+
+    <b>Product/Version:</b> CITSmart | 7.00 &nbsp;&nbsp;
+    <b>Updated:</b>01/18/2019 – Anna Martins

@@ -1,0 +1,155 @@
+<?xml version='1.0' encoding='UTF-8'?><br.com.centralit.citcorpore.bean.SmartReportDTO><identificacao>CONTABILIZACAO DE KM POR ANALISTA</identificacao><descricao>CONTABILIZAÇÃO DE KM POR ANALISTA</descricao><idCategoria>1</idCategoria><tipoConsulta>2</tipoConsulta><tipoRelatorio>7</tipoRelatorio><parametros>&lt;?xml version="1.0" encoding="ISO-8859-1" ?>
+&lt;PARAMETERS> 
+ &lt;PARAM name='dataInicial' type='java.sql.Date' size='10' value='' description='citcorpore.comum.datainicio' fix='false' mandatory='false' />
+&lt;PARAM name='dataFinal' type='java.sql.Date' size='10'value='' description='citcorpore.comum.datafim' fix='false' mandatory='false' />
+&lt;PARAM name='usuario' type='java.lang.Integer' typeHTML='select' size='0'  value='' description='Atendente' fix='false' mandatory='false' reload='true' onload='true'>
+               &lt;OPTION value='-1' text='Todos'/>       
+    &lt;OPTIONS type='SQL' onload='true'>
+               SELECT DISTINCT usuario.idusuario, usuario.nome FROM usuario JOIN posicionamentoatendente ON usuario.idusuario = posicionamentoatendente.idusuario
+                &lt;/OPTIONS>
+&lt;/PARAM>
+&lt;/PARAMETERS>
+</parametros><sql></sql><script>var importNames = JavaImporter();
+importNames.importPackage(Packages.java.util);
+importNames.importPackage(Packages.java.lang);
+importNames.importPackage(Packages.java.lang.reflect);
+importNames.importPackage(Packages.br.com.centralit.citcorpore.util);
+importNames.importPackage(Packages.br.com.citframework.util);
+importNames.importPackage(Packages.br.com.centralit.citajax.servlet);
+importNames.importPackage(Packages.br.com.centralit.citcorpore.bean);
+importNames.importPackage(Packages.br.com.centralit.citcorpore.negocio);
+
+var fUsers = function() {
+    var sql = new importNames.StringBuilder();
+    sql.append(" SELECT DISTINCT posicionamentoatendente.idusuario, usuario.nome FROM posicionamentoatendente JOIN usuario ON posicionamentoatendente.idusuario = usuario.idusuario ");
+  
+  	if (hashParametros.get("PARAM.usuario") != null &amp;&amp; hashParametros.get("PARAM.usuario") > 0) {
+    	sql.append(" WHERE posicionamentoatendente.idusuario = " + hashParametros.get("PARAM.usuario"));
+    }
+
+  	sql.append(" ORDER BY posicionamentoatendente.idusuario ");
+  
+    //sql.append(" SELECT DISTINCT posicionamentoatendente.idusuario, usuario.nome FROM posicionamentoatendente JOIN usuario ON posicionamentoatendente.idusuario = usuario.idusuario WHERE posicionamentoatendente.idusuario = 6 ");
+  
+    return jdbcEngine.execSQL(sql, null, 0);
+}
+
+var fPositions = function(idUser) {
+    var sql = new importNames.StringBuilder();
+    sql.append(" SELECT ");
+    sql.append(" posicionamentoatendente.latitude, ");
+    sql.append(" posicionamentoatendente.longitude, ");
+    sql.append(" posicionamentoatendente.datetime ");
+    sql.append(" FROM ");
+    sql.append(" posicionamentoatendente ");
+               sql.append(" WHERE ");
+               sql.append(" posicionamentoatendente.idusuario = " + idUser);
+  
+               if (hashParametros.get("PARAM.dataInicial") != "" &amp;&amp; hashParametros.get("PARAM.dataFinal") != "") {
+                               var pDataInicio = importNames.UtilDatas.getTimeStampInicioPeriodo(hashParametros.get("PARAM.dataInicial"));
+                               var pDataFim = importNames.UtilDatas.getTimeStampFimPeriodo(hashParametros.get("PARAM.dataFinal"));
+      
+               sql.append(" AND posicionamentoatendente.datetime BETWEEN '" + pDataInicio + "' and '" + pDataFim + "' "); 
+    }
+               
+    sql.append(" ORDER BY ");
+    sql.append(" posicionamentoatendente.datetime ");
+
+    return jdbcEngine.execSQL(sql, null, 0);
+}
+
+var fRequests = function(idUser) {           
+    var sql = new importNames.StringBuilder();
+    sql.append(" SELECT COUNT(idsolicitacao) AS count FROM atribuicaosolicitacao WHERE idusuario = " + idUser);
+  
+               if (hashParametros.get("PARAM.dataInicial") != "" &amp;&amp; hashParametros.get("PARAM.dataFinal") != "") {
+                               var pDataInicio = importNames.UtilDatas.getTimeStampInicioPeriodo(hashParametros.get("PARAM.dataInicial"));
+                               var pDataFim = importNames.UtilDatas.getTimeStampFimPeriodo(hashParametros.get("PARAM.dataFinal"));
+      
+               sql.append(" AND datainicioatendimento between '" + pDataInicio + "' and '" + pDataFim + "' "); 
+    }
+               
+    return jdbcEngine.execSQL(sql, null, 0);
+}
+
+//distance(-23.608343600000000, -46.693520100000000, -23.608345400000000, -46.693504700000000, 'K');
+var distance = function(lat1, lon1, lat2, lon2, unit) {
+                if ((lat1 == lat2) &amp;&amp; (lon1 == lon2)) {
+                               return 0;
+                } else {
+                               var radlat1 = Math.PI * lat1/180;
+                               var radlat2 = Math.PI * lat2/180;
+                               var theta = lon1-lon2;
+                               var radtheta = Math.PI * theta/180;
+                               var dist = Math.sin(radlat1) * Math.sin(radlat2) + Math.cos(radlat1) * Math.cos(radlat2) * Math.cos(radtheta);
+                               if (dist > 1) {
+                                               dist = 1;
+                               }
+                               dist = Math.acos(dist);
+                               dist = dist * 180/Math.PI;
+                               dist = dist * 60 * 1.1515;
+                               if (unit=="K") { dist = dist * 1.609344 }
+                               if (unit=="N") { dist = dist * 0.8684 }
+                               return dist;
+                }
+}
+
+var html = importNames.StringBuilder();
+var htmlInner = importNames.StringBuilder();
+
+var usersArr = fUsers();
+
+if (usersArr &amp;&amp; usersArr.size() > 0) {
+    for (var i = 0; i &lt; usersArr.size(); i++) {
+               var user = usersArr.get(i);
+               var dist = 0;
+               var req = 0;
+      
+               var positionsArr = fPositions(user[0]);
+      
+               if (positionsArr &amp;&amp; positionsArr.size() > 0) {
+            var latitude = 0;
+            var longitude = 0;
+          
+               for (var x = 0; x &lt; positionsArr.size(); x++) {
+                                                               var position = positionsArr.get(x);
+             
+                                                               if (latitude != 0 &amp;&amp; longitude != 0) {
+                              dist += distance(latitude, longitude, position[0], position[1], 'K');
+                }
+              
+                                                               latitude = position[0];
+                                                               longitude = position[1];
+            }
+        }
+      
+                               var requestsArr = fRequests(user[0]);
+      
+                               if (requestsArr &amp;&amp; requestsArr.size() > 0) {
+                                               var request = requestsArr.get(0);
+                                               req = parseInt(request[0]);
+               }
+
+                               htmlInner.append("&lt;tr>");
+                               htmlInner.append("&lt;td>" + user[1] + "&lt;/td>&lt;td>" + dist.toFixed(2) + "&lt;/td>&lt;td>" + req + "&lt;/td>");
+                               htmlInner.append("&lt;/tr>");
+               }
+}
+
+html.append("&lt;div>");
+html.append("&lt;table class='table'>");
+html.append("&lt;thead>");
+html.append("&lt;tr>");
+html.append("&lt;th>Atendente&lt;/th>");
+html.append("&lt;th>Distância (KM)&lt;/th>");
+html.append("&lt;th>Solicitações&lt;/th>");
+html.append("&lt;/tr>");
+html.append("&lt;/thead>");
+html.append("&lt;tbody>");
+html.append(htmlInner);
+html.append("&lt;/tbody>");
+html.append("&lt;/table>");
+html.append("&lt;/div>");
+
+HTML_RESULT.append(html);
+</script><jsp></jsp><template></template><tipoExibicao>N</tipoExibicao></br.com.centralit.citcorpore.bean.SmartReportDTO>

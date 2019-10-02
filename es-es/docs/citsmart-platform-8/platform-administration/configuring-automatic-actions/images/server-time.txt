@@ -1,0 +1,54 @@
+var importNames = JavaImporter();
+
+importNames.importPackage(Packages.java.util);
+
+importNames.importPackage(Packages.java.lang);
+
+importNames.importPackage(Packages.java.sql);
+
+importNames.importPackage(Packages.br.com.citframework.util);
+
+importNames.importPackage(Packages.br.com.citframework.integracao);
+
+importNames.importPackage(java.io);
+
+
+var print = java.lang.System.out;
+
+var dataHoraAtual = importNames.UtilDatas.getDataHoraAtual();
+
+print.println("DATA E HORA DO SERVIDOR: "+ dataHoraAtual);
+
+
+executaConsultaCURRENT_TIMESTAMP = function(){
+
+var jdbcEngine = new importNames.JdbcEngine("jdbc/citsmart", null);
+
+return jdbcEngine.execSQL("select CURRENT_TIMESTAMP", null, 0);
+
+}
+
+
+var dataHoraBanco;
+
+var listaCURRENT_TIMESTAMP = executaConsultaCURRENT_TIMESTAMP();
+
+if((listaCURRENT_TIMESTAMP!=null)&&(listaCURRENT_TIMESTAMP.size()>0)){
+
+for (var itElemento = listaCURRENT_TIMESTAMP.iterator(); itElemento.hasNext();){
+
+var elemento = itElemento.next();
+
+if (elemento!=null) {
+
+dataHoraBanco = elemento[0];
+
+break;
+
+}
+
+}
+
+}
+
+print.println("DATA E HORA DO BANCO DE DADOS: "+ dataHoraBanco);

@@ -1,0 +1,54 @@
+<?xml version='1.0' encoding='UTF-8'?><br.com.centralit.citcorpore.bean.SmartReportDTO><identificacao>Reliability</identificacao><descricao>Reliability</descricao><idCategoria>1</idCategoria><tipoConsulta>2</tipoConsulta><tipoRelatorio>5</tipoRelatorio><parametros>&lt;PARAMETERS>
+
+	&lt;PARAM name='dataInicial' type='java.sql.Date' size='10' value='' description='citcorpore.comum.datainicio' fix='false' mandatory="true" default="{MONTH_AGO}"/>
+
+  	&lt;PARAM name='dataFinal' type='java.sql.Date' size='10' value='' description='citcorpore.comum.datafim' fix='false' mandatory="true" default="{TODAY}"/>
+ &lt;PARAM name='contrato' type='java.lang.Integer' typeHTML='select' size='0' value='' description='changeRequestTargets.types.service' fix='false' mandatory='true' reload='true' onload='true'>
+	&lt;OPTIONS type='SQL' onload='true'>
+		select distinct
+            servcont.idservicocontrato,
+            serv.nomeservico
+        from
+            servico serv 
+            inner join servicocontrato servcont on serv.idservico = servcont.idservico 
+            inner join contratos cont on servcont.idcontrato = cont.idcontrato
+            inner join servicoContratoCalendario scc on scc.idservicocontrato = servcont.idservicocontrato
+            inner join servicoautorelacionamento auto on auto.idservicorelacionado = servcont.idservico 
+            inner join servico atv on atv.idservico = auto.idservico 
+        where
+            serv.tipoServico = 'N' 
+            AND serv.deleted is null 
+            AND servcont.deleted is null 
+            AND servcont.datafim is null 
+            AND cont.deleted is null
+            AND scc.datafim is null
+            AND atv.tiposervico = 'I'
+            AND atv.causaindisponibilidade = 'S'
+	&lt;/OPTIONS>
+ &lt;/PARAM>
+&lt;/PARAMETERS></parametros><sql></sql><script>var importNames = JavaImporter();
+importNames.importPackage(Packages.java.util);
+importNames.importPackage(Packages.java.lang);
+importNames.importPackage(Packages.br.com.citframework.util);
+importNames.importPackage(Packages.br.com.centralit.citsmart.rest.v3.util);
+importNames.importPackage(Packages.br.com.centralit.citcorpore.ajaxForms);
+
+var pDataInicio = importNames.UtilDatas.getTimeStampInicioPeriodo(hashParametros.get("PARAM.dataInicial"));
+var pDataFim = importNames.UtilDatas.getTimeStampFimPeriodo(hashParametros.get("PARAM.dataFinal"));
+var pContrato = importNames.Integer.parseInt(hashParametros.get("PARAM.contrato"));
+
+function iniciar(){
+	var teste = new importNames.GerenciamentoDisponibilidade().getRegistrosReport(pDataInicio, pDataFim, pContrato);
+  
+ 	QUERY_RESULT.addAll(teste.get("listValues"));
+	
+    RETURN_COLUMNS.add("Available time");
+    RETURN_COLUMNS.add("Total downtime");
+    RETURN_COLUMNS.add("Number of breaks");
+    RETURN_COLUMNS.add("MTBSI");
+    RETURN_COLUMNS.add("MTBF");
+    RETURN_COLUMNS.add("MTRS");
+}
+
+iniciar();
+</script><jsp></jsp><template></template><tipoExibicao>N</tipoExibicao></br.com.centralit.citcorpore.bean.SmartReportDTO>

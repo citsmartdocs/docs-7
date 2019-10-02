@@ -1,0 +1,715 @@
+# Project information
+site_name: 'CITSmart Documentation'
+site_description: 'Documentation of CITSmart Procucts'
+site_author: 'CITSmart Corporation'
+site_url: 'https://docs-7.citsmart.com/en-us/index.html'
+
+# Repository
+#repo_name: 'citsmart/docs'
+#repo_url: 'https://github.com'
+
+# Copyright
+copyright: 'Copyright &copy; 2019 CITSmart'
+
+# Configuration
+theme:
+  name: material
+  custom_dir: theme
+  static_templates:
+  - 'home.html'
+  - 'get_started.html'
+  - 'citsmart_platform.html'
+  - 'citsmart_neuro.html'
+  - 'videos.html'
+
+  # Default values, taken from mkdocs_theme.yml
+  language: en
+  palette:
+    primary: indigo
+    accent: orange
+  font:
+    text: Roboto
+    code: Roboto Mono
+  logo: assets/images/citsmart_logo.png
+  favicon: assets/images/favicon.ico
+  feature:
+    tabs: true
+
+# Extra CSS
+extra_css:
+  - 'assets/stylesheets/extra-docs.css'
+  - 'assets/stylesheets/home.css'
+
+# Plugins
+plugins:
+    - search:
+        lang: en
+
+# Customization
+extra:
+  social:
+    - type: 'twitter'
+      link: 'https://twitter.com/cit_smart'
+    - type: 'facebook'
+      link: 'https://pt-br.facebook.com/pages/category/Science--Technology---Engineering/CITSmart-754337128060477/'
+    - type: 'linkedin'
+      link: 'https://pt.linkedin.com/company/citsmart'
+    - type: 'youtube'
+      link: 'https://www.youtube.com/channel/UCpfmjLsOfPYmnjyoW5QyKuQ'
+
+#hidden: ['Home', 'MailUs']
+#nav_right: ['About', 'Contact']
+
+# Google Analytics
+#google_analytics:
+#  - 'UA-XXXXXXXX-X'
+#  - 'auto'
+
+# Extensions
+markdown_extensions:
+  - markdown.extensions.admonition
+  - markdown.extensions.codehilite:
+      guess_lang: false
+  - markdown.extensions.def_list
+  - markdown.extensions.footnotes
+  - markdown.extensions.meta
+  - markdown.extensions.toc:
+      permalink: true
+  - pymdownx.arithmatex
+  - pymdownx.betterem:
+      smart_enable: all
+  - pymdownx.caret
+  - pymdownx.critic
+  - pymdownx.details
+  - pymdownx.emoji:
+      emoji_generator: !!python/name:pymdownx.emoji.to_svg
+  - pymdownx.inlinehilite
+  - pymdownx.keys
+  - pymdownx.magiclink:
+      repo_url_shorthand: true
+      user: squidfunk
+      repo: mkdocs-material
+  - pymdownx.mark
+  - pymdownx.smartsymbols
+  - pymdownx.superfences
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.tilde
+
+# Generate page .html
+use_directory_urls: false
+
+# Nav tree
+nav:
+- Home:
+  - 'https://docs-7.citsmart.com/pt-br/home.html'
+- CITSmart 7:
+  - Get Started:
+    - About CITSmart:
+      - index.md
+      - citsmart-7/get-started/about-citsmart/whats-citsmart.md
+      - citsmart-7/get-started/about-citsmart/whats-new-v8.md
+      - citsmart-7/get-started/about-citsmart/introduction-to-platform.md
+      - citsmart-7/get-started/about-citsmart/comparative-versions.md
+      - citsmart-7/get-started/about-citsmart/release-policy.md
+    - Release Notes:
+      - citsmart-7/get-started/about-citsmart/release-notes.md
+      - What´s New:
+        - citsmart-7/get-started/about-citsmart/release-notes/version-7.0.0.0.md
+    - Architecture:
+      - citsmart-7/get-started/architecture/architecture.md
+      #- citsmart-7/get-started/architecture/on-premise.md
+      - Installation & Upgrade:
+        - citsmart-7/get-started/installation-and-upgrade/overview.md
+        - citsmart-7/get-started/installation-and-upgrade/system-requirements.md
+        - citsmart-7/get-started/installation-and-upgrade/download-software.md
+        - citsmart-7/get-started/installation-and-upgrade/perform-installation.md
+      # - citsmart-7/get-started/installation-and-upgrade/prepare-for-upgrade.md
+      # - citsmart-7/get-started/installation-and-upgrade/run-update.md
+  - Initial Settings:
+    - citsmart-7/initial-settings/navigation-and-user-interface.md
+    - Basic Settings:
+      - citsmart-7/initial-settings/introduction.md
+#      - citsmart-7/initial-settings/set-language-and-location.md
+      - citsmart-7/initial-settings/set-system-url.md
+    - Access Settings:
+      - Profile:
+        - citsmart-7/initial-settings/access-settings/profile/create-profile-access.md
+        - citsmart-7/initial-settings/access-settings/profile/smart-decision.md
+      - User:
+        - citsmart-7/initial-settings/access-settings/user/register-employee.md
+        - citsmart-7/initial-settings/access-settings/user/users.md
+        - citsmart-7/initial-settings/access-settings/user/user-data.md
+        - citsmart-7/initial-settings/access-settings/user/position.md
+        - citsmart-7/initial-settings/access-settings/user/register-groups.md
+    - User Panel:
+      - citsmart-7/initial-settings/user-panel/home-panel.md
+      - citsmart-7/initial-settings/user-panel/register-menu.md
+  - Platform Administration:
+    - Introduction:
+      - citsmart-7/platform-administration/introduction.md
+    - Authentication:
+      - citsmart-7/platform-administration/authentication/overview.md
+      - citsmart-7/platform-administration/authentication/ldap.md
+      - citsmart-7/platform-administration/authentication/sso.md
+      - citsmart-7/platform-administration/authentication/okta.md
+    - Security:
+      - citsmart-7/platform-administration/security/implement-password-security-rules.md
+      - citsmart-7/platform-administration/security/reset-password.md
+    - Time:
+      - citsmart-7/platform-administration/time/create-calendar.md
+      - citsmart-7/platform-administration/time/create-cycle.md
+      - citsmart-7/platform-administration/time/create-working-day.md
+    - Region & Language:
+      - citsmart-7/platform-administration/region-and-language/load-countries.md
+      - citsmart-7/platform-administration/region-and-language/register-locations.md
+      - citsmart-7/platform-administration/region-and-language/register-unit.md
+      - citsmart-7/platform-administration/region-and-language/standard-language.md
+#     - citsmart-7/platform-administration/region-and-language/timezone.md
+      - citsmart-7/platform-administration/region-and-language/type-of-unit.md
+    - Data & Import:
+      - citsmart-7/platform-administration/data-and-import/employee-import.md
+      - citsmart-7/platform-administration/data-and-import/general-import.md
+      - citsmart-7/platform-administration/data-and-import/metadata-load.md
+      - citsmart-7/platform-administration/data-and-import/portfolio-import-service-portfolio.md
+      - citsmart-7/platform-administration/data-and-import/spreadsheet-employee.md
+      - citsmart-7/platform-administration/data-and-import/spreedsheet-import-portfolio.md
+    - Database:
+      - citsmart-7/platform-administration/database/data-management.md
+      - citsmart-7/platform-administration/database/import-data-import-management.md
+#      - citsmart-7/platform-administration/database/load-metadata.md
+      - citsmart-7/platform-administration/database/register-data-import.md
+      - citsmart-7/platform-administration/database/register-external-connections.md
+      - citsmart-7/platform-administration/database/run-script.md
+      - citsmart-7/platform-administration/database/script-database-tool.md
+    - Environment Configuration:
+      - citsmart-7/platform-administration/environment-configuration/banner-logo.md
+      - citsmart-7/platform-administration/environment-configuration/knowledge-portal-configure-filtres.md
+      - citsmart-7/platform-administration/environment-configuration/knowledge-portal-customize-knowledge-portal.md
+      - citsmart-7/platform-administration/environment-configuration/system-configure-enviroment.md
+      - citsmart-7/platform-administration/environment-configuration/system-customization.md
+    - Parameters:
+      - citsmart-7/platform-administration/parameters-list/configuration-parametrization-mobile.md
+      - citsmart-7/platform-administration/parameters-list/configure-parametrization-change.md
+      - citsmart-7/platform-administration/parameters-list/configure-parametrization-chat.md
+      - citsmart-7/platform-administration/parameters-list/configure-parametrization-configuration.md
+      - citsmart-7/platform-administration/parameters-list/configure-parametrization-email.md
+      - citsmart-7/platform-administration/parameters-list/configure-parametrization-knowledge.md
+      - citsmart-7/platform-administration/parameters-list/configure-parametrization-ldap.md
+      - citsmart-7/platform-administration/parameters-list/configure-parametrization-problem.md
+      - citsmart-7/platform-administration/parameters-list/configure-parametrization-release.md
+      - citsmart-7/platform-administration/parameters-list/configure-parametrization-smart-portal.md
+      - citsmart-7/platform-administration/parameters-list/configure-parametrization-system.md
+      - citsmart-7/platform-administration/parameters-list/configure-parametrization-telephony.md
+      - citsmart-7/platform-administration/parameters-list/configure-parametrization-ticket.md
+      - citsmart-7/platform-administration/parameters-list/configure-parametrization-voip.md
+      - citsmart-7/platform-administration/parameters-list/configure-parametrization-work-order.md
+    - Customizable Fields:
+      - citsmart-7/platform-administration/customizable-fields/label-customize-system.md
+      - citsmart-7/platform-administration/customizable-fields/labels-configure-mandatory-fields.md
+      - citsmart-7/platform-administration/customizable-fields/labels-configure-views.md
+      - citsmart-7/platform-administration/customizable-fields/register-domain-item.md
+      - citsmart-7/platform-administration/customizable-fields/register-domain.md
+    - Data Indexing:
+      - citsmart-7/platform-administration/data-indexing/configuration.md
+    - Email Configuration:
+      - citsmart-7/platform-administration/email-settings/configuration.md
+      - citsmart-7/platform-administration/email-settings/email-templates-configure-email-template.md
+      - citsmart-7/platform-administration/email-settings/register-mail-box.md
+    - Email Keys (placehoders):
+      - citsmart-7/platform-administration/email-settings/key-field/key-fields-change-email.md
+      - citsmart-7/platform-administration/email-settings/key-field/knowledge-base-email.md
+      - citsmart-7/platform-administration/email-settings/key-field/problem-email.md
+      - citsmart-7/platform-administration/email-settings/key-field/resquest-email-key.md
+    - Questionnaires:
+      - citsmart-7/platform-administration/questionnaires/questionaires-management/questionnaire-category.md
+      - citsmart-7/platform-administration/questionnaires/questionaires-management/questionnaires-management.md
+      - citsmart-7/platform-administration/questionnaires/questionaires-management/register-questionnaire.md
+      - citsmart-7/platform-administration/questionnaires/ticket-template.md
+    - Configuring Automatic Actions:
+      - Batch Processing:
+        - citsmart-7/platform-administration/configuring-automatic-actions/batch-batch-processing.md
+      - register automatic actions:
+        - citsmart-7/platform-administration/configuring-automatic-actions/overview.md
+        - citsmart-7/platform-administration/configuring-automatic-actions/email-create-automatic-action-via-email.md
+        - citsmart-7/platform-administration/configuring-automatic-actions/notification-create.md
+        - citsmart-7/platform-administration/configuring-automatic-actions/problem-automatic-action.md
+        - citsmart-7/platform-administration/configuring-automatic-actions/register-automatic-action.md
+        - citsmart-7/platform-administration/configuring-automatic-actions/register-automatic-actions-incident-request-procedure.md
+        - citsmart-7/platform-administration/configuring-automatic-actions/register-change-automatic-actions.md
+        - citsmart-7/platform-administration/configuring-automatic-actions/register-escation-automatic-action.md
+    - Logs & Audit:
+      - citsmart-7/platform-administration/logs-and-auditing/audit040-configure.md
+      - citsmart-7/platform-administration/logs-and-auditing/system-log.md
+      - citsmart-7/platform-administration/logs-and-auditing/system-audit.md
+    - Mobile:
+      - citsmart-7/platform-administration/mobile/webservice.md
+  - Workflow:
+    - citsmart-7/workflow/overview.md
+    - Create a Workflow:
+      - citsmart-7/workflow/use/create-flow.md
+      - citsmart-7/workflow/use/user-task-configure.md
+    - Expressions:
+      - citsmart-7/workflow/configuration/expressions.md
+      - citsmart-7/workflow/configuration/expressions-creator.md
+    - Process Modeling:
+      - citsmart-7/workflow/use/modeling.md
+  - Process:
+    - citsmart-7/processes/overview.md
+    - Portfolio & Catalog:
+      - citsmart-7/processes/portfolio-and-catalog/overview.md
+      - citsmart-7/processes/portfolio-and-catalog/use/create-the-portfolio.md
+      - Register a Service:
+        - citsmart-7/processes/portfolio-and-catalog/use/register-a-service.md
+        - Configuring Request:
+          - citsmart-7/processes/portfolio-and-catalog/use/register-service-activity.md
+        - Configuring Contract:
+          - citsmart-7/processes/portfolio-and-catalog/use/service-contract-attributes.md
+          - citsmart-7/processes/portfolio-and-catalog/use/link-activity-to-service-contract.md
+        - Register Attribute:
+          - citsmart-7/processes/portfolio-and-catalog/use/configure-services-attributes.md
+          - citsmart-7/processes/portfolio-and-catalog/use/create-service-map.md
+        - Using the Smart Portal:
+          - citsmart-7/processes/portfolio-and-catalog/use/smart-portal.md
+          - citsmart-7/processes/portfolio-and-catalog/use/request-through-Smart-Portal.md
+        - Generate Reports:
+          - citsmart-7/processes/portfolio-and-catalog/use/reports-service-catalog.md
+        - Audit Service:
+          - citsmart-7/processes/portfolio-and-catalog/use/service-audit.md
+        - Tools of Notification:
+          - citsmart-7/processes/portfolio-and-catalog/configuration/register-news.md
+          - citsmart-7/processes/portfolio-and-catalog/configuration/register-satisfaction-survey.md
+        - Configuration:
+          - citsmart-7/processes/portfolio-and-catalog/configuration/access-portfolio-management.md
+          - citsmart-7/processes/portfolio-and-catalog/configuration/register-contract.md
+          - citsmart-7/processes/portfolio-and-catalog/configuration/register-operating-condition.md
+          - citsmart-7/processes/portfolio-and-catalog/configuration/register-type-of-service.md
+          - citsmart-7/processes/portfolio-and-catalog/configuration/create-service-category.md
+          - citsmart-7/processes/portfolio-and-catalog/configuration/register-service-template.md
+          - citsmart-7/processes/portfolio-and-catalog/configuration/register-business-process.md
+          - citsmart-7/processes/portfolio-and-catalog/configuration/register-cause-incidents.md
+          - citsmart-7/processes/portfolio-and-catalog/configuration/register-company.md
+          - citsmart-7/processes/portfolio-and-catalog/configuration/register-client.md
+          - citsmart-7/processes/portfolio-and-catalog/configuration/register-provider.md
+          - citsmart-7/processes/portfolio-and-catalog/configuration/register-news-category.md
+          - citsmart-7/processes/portfolio-and-catalog/configuration/register-solution-category.md
+          - citsmart-7/processes/portfolio-and-catalog/configuration/register-request-justification.md
+          - citsmart-7/processes/portfolio-and-catalog/configuration/register-priority.md
+          - citsmart-7/processes/portfolio-and-catalog/configuration/register-service-request-priority.md
+          - citsmart-7/processes/portfolio-and-catalog/configuration/register-skill-resource.md
+          - citsmart-7/processes/portfolio-and-catalog/configuration/send-email-reclassified-ticket.md
+    - Service Level:
+      - citsmart-7/processes/service-level/overview.md
+      - citsmart-7/processes/service-level/use/create-time-attendance.md
+      - citsmart-7/processes/service-level/use/service-level-requirement.md
+      - citsmart-7/processes/service-level/use/service-level-agreement.md
+      - citsmart-7/processes/service-level/use/improvement-plan.md
+      - Reports:
+        - citsmart-7/processes/service-level/use/contract-evaluation.md
+        - citsmart-7/processes/service-level/use/provider-evaluation.md
+        - citsmart-7/processes/service-level/use/SLA-evaluation.md
+        - citsmart-7/processes/service-level/use/reports-service-level-management.md
+    - Tickets:
+      - citsmart-7/processes/tickets/overview.md
+      - Desktop:
+        - citsmart-7/processes/tickets/use/desktop-of-service-desk.md
+        - citsmart-7/processes/tickets/use/locate-a-ticket.md
+        - citsmart-7/processes/tickets/use/search-ticket-in-the-advanced-mode.md
+      - Create a Ticket:
+        - citsmart-7/processes/tickets/use/create-ticket.md
+        - citsmart-7/processes/tickets/use/register-ticket-via-template.md
+        - citsmart-7/processes/tickets/configuration/create-then-close-ticket.md
+        - citsmart-7/processes/tickets/configuration/create-ticket-receiving-email.md
+      - Approval Ticket:
+        - citsmart-7/processes/tickets/use/approve-a-ticket.md
+      - Attending Ticket:
+        - Capture Ticket:
+          - citsmart-7/processes/tickets/use/capture-ticket.md
+          - citsmart-7/processes/tickets/use/register-ticket-occurrences.md
+          - citsmart-7/processes/tickets/use/direct-the-ticket.md
+          - citsmart-7/processes/tickets/use/link-other-functionalities-to-the-ticket.md
+          - citsmart-7/processes/tickets/use/create-and-view-sub-request.md
+          - citsmart-7/processes/tickets/use/attend-with-remote-support.md
+          - citsmart-7/processes/tickets/use/hierarchical-escalation-in-the-attendance.md
+          - citsmart-7/processes/tickets/use/register-ticket-execution.md
+          - citsmart-7/processes/tickets/use/validate-ticket.md
+          - citsmart-7/processes/tickets/use/cancel-ticket.md
+        - Select Options:
+          - citsmart-7/processes/tickets/use/change-SLA-of-a-ticket.md
+          - citsmart-7/processes/tickets/use/delegate-ticket.md
+          - citsmart-7/processes/tickets/use/print-ticket.md
+          - citsmart-7/processes/tickets/use/reactivate-a-ticket-suspended.md
+          - citsmart-7/processes/tickets/use/reclassify-ticket.md
+          - citsmart-7/processes/tickets/use/register-ticket-related.md
+          - citsmart-7/processes/tickets/use/schedule-ticket-activity.md
+          - citsmart-7/processes/tickets/use/suspend-and-reactivate-tickets.md
+          - citsmart-7/processes/tickets/use/suspend-ticket.md
+          - citsmart-7/processes/tickets/use/verify-my-tickets.md
+      - Reopen Ticket:
+        - citsmart-7/processes/tickets/use/reopen-ticket.md
+      - Team Management:
+        - citsmart-7/processes/tickets/use/manage-a-ticket-with-Kanban.md
+      - Reports & Search:
+        - citsmart-7/processes/tickets/use/analyse-service-request-trends.md
+        - citsmart-7/processes/tickets/use/analyze-event-trends.md
+        - citsmart-7/processes/tickets/use/audit-a-ticket.md
+        - citsmart-7/processes/tickets/use/generate-reports-tickets.md
+        - citsmart-7/processes/tickets/use/generate-report-through-the-panel-of-charts.md
+      - Escation Rules:
+        - citsmart-7/processes/tickets/use/create-escalation-rule.md
+      - Configuration:
+        - citsmart-7/processes/tickets/configuration/access-ticket-management.md
+        - citsmart-7/processes/tickets/use/register-ticket-source.md
+        - citsmart-7/processes/tickets/configuration/approve-request-via-email.md
+        - citsmart-7/processes/tickets/configuration/create-template-of-ticket.md
+        - citsmart-7/processes/tickets/configuration/notification-delegated-email-ticket.md
+        - citsmart-7/processes/tickets/configuration/relate-group-to-contract.md
+        - citsmart-7/processes/tickets/configuration/relate-unit-to-contract.md
+#      - Fluxo:
+#        - citsmart-7/processes/tickets/flow/flow.md
+    - Knowledge:
+      - citsmart-7/processes/knowledge/overview.md
+      - Knowledge Portal:
+        - citsmart-7/processes/knowledge/use/knowledge-portal.md
+        - citsmart-7/processes/knowledge/use/display-tags-on-knowledge-portal.md
+        - citsmart-7/processes/knowledge/configuration/refine-search-knowledge-portal.md
+        - citsmart-7/processes/knowledge/use/review-reviews.md
+      - citsmart-7/processes/knowledge/use/create-knowledge.md
+      - citsmart-7/processes/knowledge/use/create-experience-center.md
+      - citsmart-7/processes/knowledge/use/generate-reports-knowledge-management.md
+      - Configuration:
+        - citsmart-7/processes/knowledge/configuration/create-folder.md
+        - Images:
+          - citsmart-7/processes/knowledge/configuration/register-image-category.md
+          - citsmart-7/processes/knowledge/configuration/store-images-gallery.md
+        - citsmart-7/processes/knowledge/configuration/register-subject.md
+        - citsmart-7/processes/knowledge/configuration/register-synonym.md
+        - citsmart-7/processes/knowledge/configuration/configure-external-access-knowledge-portal.md
+        - citsmart-7/processes/knowledge/use/index-knowledge.md
+        - citsmart-7/processes/knowledge/configuration/notify-responsible-knowledge-expiration.md
+#      - Fluxo:
+#        - citsmart-7/processes/knowledge/flow/flow.md
+    - Problem:
+      - citsmart-7/processes/problem/overview.md
+      - citsmart-7/processes/problem/use/register-problem.md
+      - citsmart-7/processes/problem/use/advanced-search-for-problem.md
+      - Diagnosis:
+        - citsmart-7/processes/problem/use/problem-execution.md
+        - citsmart-7/processes/problem/use/problem-occurrences.md
+        - citsmart-7/processes/problem/use/schedule-problem-activities.md
+        - citsmart-7/processes/problem/use/suspend-problem.md
+        - citsmart-7/processes/problem/use/cancel-problem.md
+        - citsmart-7/processes/problem/use/relate-information-to-problem.md
+      - citsmart-7/processes/problem/use/generate-reports-problem-management.md
+      - Configuration:
+        - citsmart-7/processes/problem/configuration/problem-portfolio.md
+        - citsmart-7/processes/problem/configuration/problem-justification.md
+    - Change:
+      - citsmart-7/processes/change/overview.md
+      - Register a Change:
+        - citsmart-7/processes/change/use/register-change.md
+        - citsmart-7/processes/change/use/register-change-via-template.md
+      - Execute Change:
+        - citsmart-7/processes/change/use/relate-information-to-change.md
+        - citsmart-7/processes/change/use/change-planning-activities.md
+        - citsmart-7/processes/change/use/change-occurrences.md
+        - citsmart-7/processes/change/use/change-reversion-plan.md
+        - citsmart-7/processes/change/use/change-approval.md
+        - citsmart-7/processes/change/use/cancel-change.md
+        - citsmart-7/processes/change/use/suspend-change.md
+        - citsmart-7/processes/change/use/execute-change.md
+      - Reports and Search:
+        - citsmart-7/processes/change/use/advanced-search-for-change.md
+        - citsmart-7/processes/change/use/generate-reports-change-management.md
+        - citsmart-7/processes/change/use/generate-reports-charts-panel-change.md
+        - citsmart-7/processes/change/use/change-additional-reports.md
+      - Configuration:
+        - citsmart-7/processes/change/configuration/change-portfolio.md
+        - citsmart-7/processes/change/configuration/change-justification.md
+        - citsmart-7/processes/change/configuration/change-schedule.md
+        - citsmart-7/processes/change/configuration/change-template.md
+    - Release:
+      - citsmart-7/processes/release/overview.md
+      - Desktop:
+        - citsmart-7/processes/release/use/release-desktop.md
+        - citsmart-7/processes/release/use/advanced-search-for-release.md
+      - Execute Release:
+        - citsmart-7/processes/release/use/register-release-request.md
+        - citsmart-7/processes/release/use/release-planning-activities.md
+        - citsmart-7/processes/release/use/execute-release.md
+        - citsmart-7/processes/release/use/relate-information-to-release.md
+        - citsmart-7/processes/release/use/deployment-release-activities.md
+        - citsmart-7/processes/release/use/suspend-release.md
+        - citsmart-7/processes/release/use/reopen-release.md
+        - citsmart-7/processes/release/use/cancel-release.md
+      - Configuration:
+        - citsmart-7/processes/release/configuration/release-portfolio.md
+        - citsmart-7/processes/release/use/release-justification.md
+    - Configuration & Assets:
+      - citsmart-7/processes/configuration/overview.md
+      - View CMDB:
+        - Configuration Item:
+          - citsmart-7/processes/configuration/use/search-CI.md
+          - citsmart-7/processes/configuration/use/register-CI.md
+          - citsmart-7/processes/configuration/use/change-IC-item-data.md
+          - citsmart-7/processes/configuration/use/link-demand-attributes-to-CI.md
+          - citsmart-7/processes/configuration/use/link-SLA-to-CI-group.md
+          - citsmart-7/processes/configuration/use/CI-history.md
+          - citsmart-7/processes/configuration/use/verify-status-inventory.md
+          - citsmart-7/processes/configuration/use/CI-processes-related.md
+          - citsmart-7/processes/configuration/use/configuration-item-impact.md
+          - citsmart-7/processes/configuration/use/link-calendar-to-group-of-IC.md
+          - citsmart-7/processes/configuration/use/run-script-of-CI.md
+          - citsmart-7/processes/configuration/use/cost-per-hour-unavailability.md
+          - citsmart-7/processes/configuration/use/export-CMDB.md
+        - Group:
+          - citsmart-7/processes/configuration/configuration/register-configuration-item-group.md
+          - citsmart-7/processes/configuration/use/delete-group-of-IC.md
+          - citsmart-7/processes/configuration/use/change-group-configuration-item.md
+        - Alerts:
+          - citsmart-7/processes/configuration/use/CI-captured-by-inventory.md
+      - Reports:
+        - citsmart-7/processes/configuration/use/generate-report-configuration-management.md
+        - citsmart-7/processes/configuration/use/generate-reports-charts-panel-ic.md
+      - Media Library:
+        - citsmart-7/processes/configuration/configuration/register-definitive-media.md
+      - Configuration:
+        - Configuration Item:
+          - citsmart-7/processes/configuration/configuration/register-characteristics.md
+          - citsmart-7/processes/configuration/configuration/register-type-ic.md
+          - citsmart-7/processes/configuration/configuration/create-configuration-item-related-ic.md
+        - citsmart-7/processes/configuration/configuration/configure-remote-access.md
+        - citsmart-7/processes/configuration/configuration/register-financial-value-ic.md
+        - citsmart-7/processes/configuration/configuration/register-software-blacklist.md
+        - citsmart-7/processes/configuration/configuration/inventory-mib.md
+    - Event:
+      - citsmart-7/processes/event/overview.md
+      - Event Center:
+        - citsmart-7/processes/event/use/the-event-center.md
+        - citsmart-7/processes/event/use/search-event.md
+      - Verify Event:
+        - citsmart-7/processes/event/use/view-event.md
+        - citsmart-7/processes/event/use/internal-menu-of-event.md
+        - Select Options:
+          - citsmart-7/processes/event/use/close-event-occurrence.md
+          - citsmart-7/processes/event/use/close-occurences-and-actions.md
+          - citsmart-7/processes/event/use/create-ticket-from-an-event.md
+          - citsmart-7/processes/event/use/create-change-from-an-event.md
+          - citsmart-7/processes/event/use/create-a-problem-from-an-event.md
+      - Reports:
+        - citsmart-7/processes/event/use/register-event-audit.md
+        - citsmart-7/processes/event/use/generate-reports-event-management.md
+      - Configuration:
+        - Manager:
+          - citsmart-7/processes/event/configuration/register-nagios-generic-manager.md
+          - citsmart-7/processes/event/configuration/register-nagios-manager.md
+          - citsmart-7/processes/event/configuration/register-inventory-manager.md
+          - citsmart-7/processes/event/configuration/register-zabbix-generic-manager.md
+          - citsmart-7/processes/event/configuration/register-zabbix-manager.md
+          - citsmart-7/processes/event/configuration/register-global-manager.md
+        - Connection:
+          - citsmart-7/processes/event/configuration/set-inventory-connection.md
+          - citsmart-7/processes/event/configuration/register-event-monitor-connection.md
+          - citsmart-7/processes/event/configuration/register-nagios-zabbix-connection.md
+        - Notify:
+          - citsmart-7/processes/event/configuration/register-notification-recipient.md
+          - citsmart-7/processes/event/configuration/register-event-notification.md
+        - citsmart-7/processes/event/configuration/register-epl-template.md
+        - citsmart-7/processes/event/configuration/register-occurence-category.md
+        - citsmart-7/processes/event/configuration/register-time.md
+    - Availability:
+      - citsmart-7/processes/availability/overview.md
+      - Verify availability:
+        - citsmart-7/processes/availability/use/CI-group-availability.md
+        - citsmart-7/processes/availability/use/availability-group.md
+        - citsmart-7/processes/availability/use/service-availability.md
+        - citsmart-7/processes/availability/use/configuration-item-availability.md
+      - Configuring:
+        - citsmart-7/processes/availability/configuration/register-availability-group.md
+    - Demand:
+      - citsmart-7/processes/demand/overview.md
+      - Register Attribute:
+        - citsmart-7/processes/demand/use/import-demand-attibute-data.md
+        - citsmart-7/processes/demand/use/register-demand-attribute.md
+    - Capacity:
+      - citsmart-7/processes/capacity/overview.md
+      - Register Indicators:
+        - citsmart-7/processes/capacity/use/capacity-indicators-data.md
+        - citsmart-7/processes/capacity/use/register-capacity-indicators.md
+    - Continuity:
+      - citsmart-7/processes/continuity/overview.md
+      - citsmart-7/processes/continuity/use/register-service-continuity.md
+      - Datails Continuity:
+        - Initiation:
+          - citsmart-7/processes/continuity/use/continuity-policy.md
+          - citsmart-7/processes/continuity/use/service-continuity-scope.md
+          - citsmart-7/processes/continuity/use/service-continuity-project.md
+        - Requirements and Strategy:
+          - citsmart-7/processes/continuity/use/continuity-vital-functions.md
+          - citsmart-7/processes/continuity/use/impact-analysis-continuity-business.md
+          - citsmart-7/processes/continuity/use/continuity-risk-evaluation.md
+          - citsmart-7/processes/continuity/use/service-continuity-strategy.md
+        - Implementation:
+          - citsmart-7/processes/continuity/use/continuity-plan.md
+          - citsmart-7/processes/continuity/use/continuity-organizational-planning.md
+          - citsmart-7/processes/continuity/use/continuity-test-registration.md
+        - Continuous Operation:
+          - citsmart-7/processes/continuity/use/continuity-awareness.md
+          - citsmart-7/processes/continuity/use/review-and-audit-continuity.md
+          - citsmart-7/processes/continuity/use/continuity-test-calendar.md
+          - citsmart-7/processes/continuity/use/invoke-continuity.md
+      - Configuration:
+        - citsmart-7/processes/continuity/configuration/access-continuity-management.md
+        - Register Threat:
+          - citsmart-7/processes/continuity/configuration/register-threat.md
+          - citsmart-7/processes/continuity/configuration/threat-category.md
+        - Register Risk:
+          - citsmart-7/processes/continuity/configuration/register-continuity-risk.md
+          - citsmart-7/processes/continuity/configuration/risk-category.md
+        - citsmart-7/processes/continuity/configuration/continuity-template.md
+  - Additional Features:
+    - Introduction:
+      - citsmart-7/additional-features/introduction.md
+    - Simple Agile Management:
+      - citsmart-7/additional-features/project-management/simple-agile-management/simple-agile-management.md
+    - Contract Management:
+      - User:
+        - citsmart-7/additional-features/contract-management/use/manage-contracts.md
+        - citsmart-7/additional-features/contract-management/use/register-contract.md
+        - citsmart-7/additional-features/contract-management/use/service-work-order.md
+      - Configuration:
+        - citsmart-7/additional-features/contract-management/configuration/export-contract-data.md
+        - citsmart-7/additional-features/contract-management/configuration/import-contract-data.md
+        - citsmart-7/additional-features/contract-management/configuration/register-currency.md
+        - citsmart-7/additional-features/contract-management/configuration/register-formula.md
+        - citsmart-7/additional-features/contract-management/configuration/register-subscription.md
+        - citsmart-7/additional-features/contract-management/configuration/subscription-group.md
+        - citsmart-7/additional-features/contract-management/configuration/work-order-formula.md
+      - Report:
+        - citsmart-7/additional-features/contract-management/report/control-contract.md
+    - Communication & Notification:
+      - Chat:
+        - citsmart-7/additional-features/communication-and-notification/chat/chat.md
+      - Email:
+        - citsmart-7/additional-features/communication-and-notification/email/register-email-notification.md
+      - Notification:
+        - Configuration:
+          - citsmart-7/additional-features/communication-and-notification/notification/configuration/enable-messaging-within-citsmart.md
+          - citsmart-7/additional-features/communication-and-notification/notification/configuration/template-create.md
+          - citsmart-7/additional-features/communication-and-notification/notification/configuration/sound-notification.md
+        - Use:
+          - citsmart-7/additional-features/communication-and-notification/notification/use/notification.md
+    - Mobile & field Service:
+      - Apps:
+        - citsmart-7/additional-features/mobile-and-field-service/apps/citsmart-app.md
+        - citsmart-7/additional-features/mobile-and-field-service/apps/citsmart-app-android.md
+        - citsmart-7/additional-features/mobile-and-field-service/apps/citsmart-app-ios.md
+        - citsmart-7/additional-features/mobile-and-field-service/apps/citsmart-field-service-manual.md
+      - Configuration:
+        - citsmart-7/additional-features/mobile-and-field-service/configuration/configure-mobile-options.md
+        - citsmart-7/additional-features/mobile-and-field-service/configuration/configure-field-service-application.md
+        - citsmart-7/additional-features/mobile-and-field-service/configuration/server-configuration-app-android-ios.md
+        - citsmart-7/additional-features/mobile-and-field-service/configuration/reason-denial-of-checkin.md
+        - citsmart-7/additional-features/mobile-and-field-service/use/get-signature-in-attendance.md
+      - Management:
+        - citsmart-7/additional-features/mobile-and-field-service/use/configure-daily-route.md
+        - citsmart-7/additional-features/mobile-and-field-service/use/positioning-of-attendants.md
+      - Reports:
+        - citsmart-7/additional-features/mobile-and-field-service/report/attendance-history.md
+    - Project Management:
+      - Configuration:
+        - citsmart-7/additional-features/project-management/project-management/configuration/register-role.md
+      - Use:
+        - citsmart-7/additional-features/project-management/project-management/use/manage-my-tasks.md
+        - citsmart-7/additional-features/project-management/project-management/use/register-project.md
+    - Reports:
+      - Presentation:
+        - citsmart-7/additional-features/reports/configuration/configuration.md
+      - Dashboard:
+        - Use:
+          - citsmart-7/additional-features/reports/create/dashboard/use/create-template.md
+          - citsmart-7/additional-features/reports/create/dashboard-customize-management-panel-smart-decision.md
+        - Configuration:
+          - citsmart-7/additional-features/reports/create/dashboard/configuration/define-metrics-kpis.md
+        - Creating:
+          - citsmart-7/additional-features/reports/create/smart-reports/configuration/build-maintain-smart-report.md
+          - citsmart-7/additional-features/reports/create/smart-reports/configuration/configure-report-view-attendance-data.md
+          - citsmart-7/additional-features/reports/create/smart-reports/configuration/create-smart-report.md
+      - General:
+        - citsmart-7/additional-features/reports/use/cost-of-unavailability.md
+        - citsmart-7/additional-features/reports/use/generate-reports-personnel-management.md
+        - citsmart-7/additional-features/reports/use/yield-control-employee.md
+      - Surveys & Feedback:
+        - citsmart-7/additional-features/surveys-and-feedback/register-degree-attendance-satisfaction.md
+        - citsmart-7/additional-features/surveys-and-feedback/surveys-and-feedback.md
+      - Smart Analytics:
+        - citsmart-7/additional-features/smart-analytics/install-bi-docker.md
+        - citsmart-7/additional-features/smart-analytics/use-bi-solution.md
+      - Social Network:
+        - citsmart-7/additional-features/social-network/create-ticket-twitter.md
+    - Add-ons:
+      - citsmart-7/additional-features/add-ons/event-monitor.md
+      - citsmart-7/additional-features/add-ons/inventory.md
+      - citsmart-7/additional-features/add-ons/remote-access.md
+      - Automation of operation:
+        - Configuration:
+          - citsmart-7/additional-features/automation-of-operation/configuration/activity-suspension.md
+          - citsmart-7/additional-features/automation-of-operation/configuration/periodic-activity-group.md
+        - Use:
+          - citsmart-7/additional-features/automation-of-operation/use/register-periodic-activity.md
+          - citsmart-7/additional-features/automation-of-operation/use/scheduled-periodic-activities.md
+  - Fast Deployment Methodology:
+    - citsmart-7/fdm/fdm.md
+- Neuro:
+  - Overview:
+    - neuro/overview.md
+    - neuro/enable-neuro.md
+  - Developing Apps:
+    - neuro/developing-applications/introduction.md
+    - neuro/developing-applications/business-object.md
+    - neuro/developing-applications/database-connection.md
+    - neuro/developing-applications/domain.md
+    - neuro/developing-applications/form.md
+    - neuro/developing-applications/internationalization.md
+    - neuro/developing-applications/neuro-application.md
+    - neuro/developing-applications/neuro-elements.md
+  - Using in CITSmart:
+    - neuro/using-neuro-sm/sm-menu.md
+    - neuro/using-neuro-sm/tickets.md
+    - neuro/using-neuro-sm/experience-center.md
+  - Advanced Options:
+    - neuro/advanced-options/business-rules.md
+    - neuro/advanced-options/css.md
+    - neuro/advanced-options/database.md
+    - neuro/advanced-options/itsm-connection.md
+    - neuro/advanced-options/package.md
+    - neuro/advanced-options/parameters.md
+    - neuro/advanced-options/process-integration-flow.md
+    - neuro/advanced-options/report-file.md
+    - neuro/advanced-options/report-setup.md
+    - neuro/advanced-options/service-integration-flow.md
+    - neuro/advanced-options/type-of-data.md
+    - neuro/advanced-options/variables.md
+  - Add-Ons:
+    - neuro/addons/addons-list.md
+  - Database Dictionary:
+    - neuro/database-dictionary.md
+  - Neuro FAQ:
+    - neuro/neuro-faq.md
+- Anuva:
+  - anuva/overview.md
+  - Configuration:
+    - anuva/configuration/anuva-citsmart.md
+    - anuva/configuration/context-anuva.md
+    - anuva/configuration/interact-anuva.md
+    - anuva/configuration/store-dialog-anuva.md
+  - Use:
+    - anuva/use/teach-anuva.md
+    - anuva/use/trainning-anuva.md
+    - anuva/use/monitoring-anuva.md
+- CITSmart GRP:
+  - citsmart-grp.md
+- Help:
+  - faq.md
+  - glossary.md
+# - contribute.md
