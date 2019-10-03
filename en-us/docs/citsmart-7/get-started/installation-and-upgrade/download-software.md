@@ -74,7 +74,7 @@ The version homologate of the Apache Solr is 6.4.2.
 
     GNU/Linux with minimum installation should be configured in the 4 machines.
 
-    In this example, we'll use CentOS Linux release 7.5.1804. If you want to use 
+    In this example, we'll use CentOS Linux release 7.5.1804. If you want to use
     other distribution, change the commands as in the package management.
 
 After all the necessary download, we can start the installation of the solution CITSmart Enterprise.
@@ -139,7 +139,7 @@ After all the necessary download, we can start the installation of the solution 
 !!! warning "ATTENTION"
 
     To this knowledge we'll use the version 9.5 of the PostgreSQL.
-    We can install PostgreSQL with the steps in this official manual: 
+    We can install PostgreSQL with the steps in this official manual:
     https://www.postgresql.org/download/linux/redhat/
 
 1. After install the PostgreSQL we can create the database, user and password;
@@ -183,8 +183,8 @@ After all the necessary download, we can start the installation of the solution 
     ```
 
 2. Note the command return analyzing the correct execution;
-3. Now we'll configure the **/var/lib/pgsql/9.5/data/pg_hba.conf** 
-to allow the Wildfly connection to the database and user of citsmart. 
+3. Now we'll configure the **/var/lib/pgsql/9.5/data/pg_hba.conf**
+to allow the Wildfly connection to the database and user of citsmart.
 At the end of the file change the lines:
 
     Default: host all all 127.0.0.1/32 md5  
@@ -224,7 +224,7 @@ systemctl restart postgresql-9.5.service
 	```
 
 	```sh
-    ln -s /opt/jdk1.8.0_172 /opt/jdk
+    ln -s /opt/jdk1.7.0_172 /opt/jdk
 	```
 
 	```sh
@@ -249,7 +249,7 @@ systemctl restart postgresql-9.5.service
     source /etc/profile
     ```
 
-3. Create a user to execute the Solr with fake shell and permission 
+3. Create a user to execute the Solr with fake shell and permission
 in the directory Solr, then, start it;
 
     ``` sh

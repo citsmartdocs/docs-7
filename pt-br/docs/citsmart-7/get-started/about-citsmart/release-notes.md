@@ -3,34 +3,34 @@ Description: Notas de release, correções de erros e melhorias na CITSmart.
 
 # Notas de Release
 
-## Versão 8.0.1.7 (2019/09/13)
+## Versão 7.0.1.7 (2019/09/13)
 
-Bem-vindos ao CITSmart Versão 8.0.1.7. Esta versão apresenta as seguintes correções:
+Bem-vindos ao CITSmart Versão 7.0.1.7. Esta versão apresenta as seguintes correções:
 
 |Item|Descricão|
 |--------|---------|
 |5569|[ITSM 1652] – Falha no Simple de Problema, Mudança e Liberação quando se cria uma Workspace, as Sprints se sobrescrevem.|
 
-## Versão 8.0.1.6 (2019/09/11)
+## Versão 7.0.1.6 (2019/09/11)
 
-Bem-vindos ao CITSmart Versão 8.0.1.6. Esta versão apresenta as seguintes correções:
+Bem-vindos ao CITSmart Versão 7.0.1.6. Esta versão apresenta as seguintes correções:
 
 |Item|Descricão|
 |--------|---------|
 |5288|Segurança – Não deixar visível a senha de usuários do sistema|
 |5272|Segurança – Não permitir acesso à tela de Scripts sem logar na aplicação|
 
-## Versão 8.0.1.5 (2019/09/02)
+## Versão 7.0.1.5 (2019/09/02)
 
-Bem-vindos ao CITSmart Versão 8.0.1.5. Esta versão apresenta as seguintes correções:
+Bem-vindos ao CITSmart Versão 7.0.1.5. Esta versão apresenta as seguintes correções:
 
 |Item|Descricão|
 |--------|---------|
 |5407|Simple – Funcionalidade não permitia baixar os anexos dos cards do Simple|
 
-## Versão 8.0.1.4 (2019/08/20)
+## Versão 7.0.1.4 (2019/08/20)
 
-Bem-vindos ao CITSmart Versão 8.0.1.4. Esta versão apresenta as seguintes correções:
+Bem-vindos ao CITSmart Versão 7.0.1.4. Esta versão apresenta as seguintes correções:
 
 |Item|Descricão|
 |--------|---------|
@@ -75,12 +75,12 @@ Bem-vindos ao CITSmart Versão 8.0.1.4. Esta versão apresenta as seguintes corr
 
 **Nota:**
 
-Na versão 8.0.1.4 o campo “Descrição” da tela de atendimento de solicitação de serviço virá bloqueado após a criação de um ticket.
+Na versão 7.0.1.4 o campo “Descrição” da tela de atendimento de solicitação de serviço virá bloqueado após a criação de um ticket.
 
 
-## Versão 8.0.1.3 (2019/07/31)
+## Versão 7.0.1.3 (2019/07/31)
 
-Bem-vindos ao Citsmart Versão 8.0.1.3. Esta versão apresenta as seguintes correções e melhorias:
+Bem-vindos ao Citsmart Versão 7.0.1.3. Esta versão apresenta as seguintes correções e melhorias:
 
 |Item|Descricão|
 |--------|---------|
@@ -135,13 +135,13 @@ Bem-vindos ao Citsmart Versão 8.0.1.3. Esta versão apresenta as seguintes corr
 
 **Nota:**
 
-Na versão 8.0.1.3 foi criado o parâmetro “452 - Continuar na tela de Ticket após salvar?” esse parâmetro, quando habilitado verifica a permissão do usuário em executar um ticket e possibilita a permanência em tela.
+Na versão 7.0.1.3 foi criado o parâmetro “452 - Continuar na tela de Ticket após salvar?” esse parâmetro, quando habilitado verifica a permissão do usuário em executar um ticket e possibilita a permanência em tela.
 
-Na versão 8.0.1.3 foi criado o parâmetro “451 - Página de redirecionamento após salvar o Ticket no Centro de Experiência” que permite informar a página que o usuário deseja retornar quando ocorrer uma ação no Centro de Experiência.
+Na versão 7.0.1.3 foi criado o parâmetro “451 - Página de redirecionamento após salvar o Ticket no Centro de Experiência” que permite informar a página que o usuário deseja retornar quando ocorrer uma ação no Centro de Experiência.
 
-## Versão 8.0.1.2 (2019/07/20)
+## Versão 7.0.1.2 (2019/07/20)
 
-Bem-vindos ao Citsmart Versão 8.0.1.2. Esta versão apresenta as seguintes correções.
+Bem-vindos ao Citsmart Versão 7.0.1.2. Esta versão apresenta as seguintes correções.
 
 |Problema|Descricão|
 |--------|---------|
@@ -149,12 +149,12 @@ Bem-vindos ao Citsmart Versão 8.0.1.2. Esta versão apresenta as seguintes corr
 |4537|Erro na sincronização do LDAP|
 |4733|Lentidão no Smart Portal quando existe conhecimentos relacionados|
 
-A partir da versão 8.0.1.2 foi inserido o parâmetro “454 - Exibir a aba de conhecimentos do smart portal apenas quando houver conteúdo” esse parâmetro controla a exibição da Aba Conhecimentos  no Smart Portal somente quando existir conhecimentos vinculados à Atividade, caso não exista, o sistema não exibe a aba.
+A partir da versão 7.0.1.2 foi inserido o parâmetro “454 - Exibir a aba de conhecimentos do smart portal apenas quando houver conteúdo” esse parâmetro controla a exibição da Aba Conhecimentos  no Smart Portal somente quando existir conhecimentos vinculados à Atividade, caso não exista, o sistema não exibe a aba.
 
 
-## Versão 8.0.1.1 (2019/07/15)
+## Versão 7.0.1.1 (2019/07/15)
 
-Bem-vindos ao Citsmart Versão 8.0.1.1. Esta versão apresenta as seguintes correções.
+Bem-vindos ao Citsmart Versão 7.0.1.1. Esta versão apresenta as seguintes correções.
 
 |Problema|Descricão|
 |--------|---------|
@@ -167,9 +167,9 @@ Bem-vindos ao Citsmart Versão 8.0.1.1. Esta versão apresenta as seguintes corr
 |4596|[My 705] - Verificar erro no cálculo de Deadline para tickets.|
 
 
-## Versão 8.0.1.0 (2019/06/28)
+## Versão 7.0.1.0 (2019/06/28)
 
-Bem-vindos ao Citsmart Versão 8.0.1.0. A versão 8.0.1.0 do Citsmart apresenta as seguintes melhorias:
+Bem-vindos ao Citsmart Versão 7.0.1.0. A versão 7.0.1.0 do Citsmart apresenta as seguintes melhorias:
 
 |Melhoria|Descricão|
 |--------|---------|
@@ -196,9 +196,9 @@ Bem-vindos ao Citsmart Versão 8.0.1.0. A versão 8.0.1.0 do Citsmart apresenta 
 |3911|Smart Portal - Após registro de ticket direcionar o usuário para "My Requests".|
 |2615|Simple – Busca por itens não selecionados.|
 
-## Versão 8.0.0.10 (2019/06/07)
+## Versão 7.0.0.10 (2019/06/07)
 
-Bem-vindos ao CITSmart Versão 8.0.0.10. Esta versão apresenta algumas correções emergenciais.
+Bem-vindos ao CITSmart Versão 7.0.0.10. Esta versão apresenta algumas correções emergenciais.
 
 | Problema	| Descrição |
 |-----------|-----------|
@@ -210,9 +210,9 @@ Bem-vindos ao CITSmart Versão 8.0.0.10. Esta versão apresenta algumas correç�
 |4148	| Melhoria nas queries da listagem de ticket |
 
 
-## Versão 8.0.0.9 (2019/05/31)
+## Versão 7.0.0.9 (2019/05/31)
 
-Bem-vindos ao CITSmart Versão 8.0.0.9. Esta versão apresenta algumas correções emergenciais.
+Bem-vindos ao CITSmart Versão 7.0.0.9. Esta versão apresenta algumas correções emergenciais.
 
 |Problema|Descrição|
 |--------|---------|
@@ -225,7 +225,7 @@ Bem-vindos ao CITSmart Versão 8.0.0.9. Esta versão apresenta algumas correçõ
 |3915|Otimizando SQL lista de solicitações.|
 |4038|Correção de upload de imagem na apresentação do portfólio.|
 
-## Versão 8.0.0.7 (2019/05/17)
+## Versão 7.0.0.7 (2019/05/17)
 Com otimizações de desempenho, melhorias de usabilidade, ajustes e correções de falhas.
 
 | **Código** | **Descrição Ticket**                                                                                                                                                                                                                                            | **tipo**  |
@@ -316,7 +316,7 @@ Neuro: 1.2.4.10
 Audit: 0.4.0
 
 
-## Versão 8.0.0.5 (2019/04/25)
+## Versão 7.0.0.5 (2019/04/25)
 
 | Problema | Descrição                                                                                                                                              |
 |----------|--------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -340,7 +340,7 @@ Se atentem para o cenário descrito:
 
 -   Pré Condições:
 
-    1.  O cliente estará atualizando a versão 7 para a versão 8.0.0.5;
+    1.  O cliente estará atualizando a versão 7 para a versão 7.0.0.5;
 
     2.  O consultor não parametrizou em Portfólio de Problema a pasta para
         gravar a base de conhecimento de Erro Conhecido;
@@ -382,36 +382,36 @@ EVM: 2.0.0.3
 Audit: 0.2.0
 
 
-## Versão 8.0.0.4 (2019/04/12)
+## Versão 7.0.0.4 (2019/04/12)
 
 | Problema | Descrição                                                                                 |
 |----------|-------------------------------------------------------------------------------------------|
 | 3275     | Falha no momento de restaurar Grupo Executor, Impacto e Urgência em Gerência de Liberação |
 
 
-## Versão 8.0.0.3 (2019/04/04)
+## Versão 7.0.0.3 (2019/04/04)
 
 | Problema | Descrição                                                                                                                                                                                                          |
 |----------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| 2573     | Erro conhecido na versão 7.0.0.0 ao responder a pesquisa de satisfação pelo Widget do Centro de Experiência. A versão 8.0.0.3 fornece uma solução definitiva para o erro ao gravar uma pesquisa de satisfação.     |
-| 2122     | Falha no webservice de criação de solicitação de serviço. A versão 8.0.0.3 fornece solução definitiva para a falha apresentada ao tentar cadastrar uma solicitação de serviço via webservice.                      |
-| 2917     | Falha ao realizar upload de anexos pela funcionalidade de solicitação de serviço. A versão 8.0.0.3 fornece solução para realizar upload dos anexos pela funcionalidade de solicitação de serviço.                  |
-| 2777     | Falha intermitente no método que retorna o timezone para gravar registro de data e hora. No componente Neuro. A versão 8.0.0.3 fornece solução definitiva no componente Neuro para gravar registro de data e hora. |
+| 2573     | Erro conhecido na versão 7.0.0.0 ao responder a pesquisa de satisfação pelo Widget do Centro de Experiência. A versão 7.0.0.3 fornece uma solução definitiva para o erro ao gravar uma pesquisa de satisfação.     |
+| 2122     | Falha no webservice de criação de solicitação de serviço. A versão 7.0.0.3 fornece solução definitiva para a falha apresentada ao tentar cadastrar uma solicitação de serviço via webservice.                      |
+| 2917     | Falha ao realizar upload de anexos pela funcionalidade de solicitação de serviço. A versão 7.0.0.3 fornece solução para realizar upload dos anexos pela funcionalidade de solicitação de serviço.                  |
+| 2777     | Falha intermitente no método que retorna o timezone para gravar registro de data e hora. No componente Neuro. A versão 7.0.0.3 fornece solução definitiva no componente Neuro para gravar registro de data e hora. |
 
-## Versão 8.0.0.2 (2019/03/20)
+## Versão 7.0.0.2 (2019/03/20)
 
 | Problema | Descrição                      |
 |----------|-----------------|
-| 2309     | Falha intermitente e de maior incidência em ambientes clusterizado no método que retorna o timezone para gravar registro de data e hora. A versão 8.0.0.2 fornece solução definitiva para o erro ocasionado nas classes que utilizam timezone para gravação de registros. |
-| 2124     | Falha de validação incorreta ao acessar uma base de conhecimento externa. A versão 8.0.0.2 fornece solução definitiva para a mensagem de expiração de sessão mostrada indevidamente quando o usuário tentava acessar uma base de conhecimento externa.                    |
-| 2400     | Falha no componente de pesquisa avançada que não retornava palavras com “ç” e “ã”. A versão 8.0.0.2 fornece solução definitiva para a pesquisa avançada com palavras acentuadas.                                                                                          |
+| 2309     | Falha intermitente e de maior incidência em ambientes clusterizado no método que retorna o timezone para gravar registro de data e hora. A versão 7.0.0.2 fornece solução definitiva para o erro ocasionado nas classes que utilizam timezone para gravação de registros. |
+| 2124     | Falha de validação incorreta ao acessar uma base de conhecimento externa. A versão 7.0.0.2 fornece solução definitiva para a mensagem de expiração de sessão mostrada indevidamente quando o usuário tentava acessar uma base de conhecimento externa.                    |
+| 2400     | Falha no componente de pesquisa avançada que não retornava palavras com “ç” e “ã”. A versão 7.0.0.2 fornece solução definitiva para a pesquisa avançada com palavras acentuadas.                                                                                          |
 
 
-## Versão 8.0.0.1 (2019/03/08)
+## Versão 7.0.0.1 (2019/03/08)
 
 | Problema | Descrição                 |
 |----------|---------------------------|
-| 2576     | Erro conhecido em portfólio que não é exibido quando existe uma data final no serviço do contrato. A versão 8.0.0.1 fornece solução definitiva para o erro ocasionado pelo portfólio de serviços. |
+| 2576     | Erro conhecido em portfólio que não é exibido quando existe uma data final no serviço do contrato. A versão 7.0.0.1 fornece solução definitiva para o erro ocasionado pelo portfólio de serviços. |
 
 
 ## Versão 7.0.0.0 (2019/03/01)
