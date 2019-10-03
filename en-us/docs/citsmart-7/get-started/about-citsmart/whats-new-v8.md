@@ -67,7 +67,7 @@ For further information access the documentation about [Experience Center][1]
 ### My Approvals Widget
 
 Approving a ticket by CITSmart is simpler, just click on the approve icon **(a.)**, you can view the ticket details and approve it or not **(b.)**.
- 
+
 ![a-Approve task](images/approve-task.bmp)
 
 ![b-View Ticket](images/view-ticket.bmp)
@@ -86,7 +86,7 @@ It allows to maintain and view workareas by users with:
 
 * Dashboards widgets
 * Native Reports and
-* Reports built in the platform. 
+* Reports built in the platform.
 
 **Each user can configure their own area with one or more tabs.**
 
@@ -95,7 +95,7 @@ It allows to maintain and view workareas by users with:
 Quick Access
 -------------
 
-It's available new icons and quick access area to the processes and portals in the upper area of the platform, in order to make it easier and more practical to access the CITSmart functionalities. 
+It's available new icons and quick access area to the processes and portals in the upper area of the platform, in order to make it easier and more practical to access the CITSmart functionalities.
 
 ![Quick Access](images/quick-access-en.png)
 
@@ -159,7 +159,7 @@ Problem Management has been redesigned to give more agility, ease and practicali
 
 ![Problem management](images/problem-management.png)
 
-To facilitate the treatment of the problem, a sequence of steps was structured in a lateral menu. 
+To facilitate the treatment of the problem, a sequence of steps was structured in a lateral menu.
 
 *   Requester information
 *   Incidents related to the problem
@@ -203,7 +203,7 @@ For further information access the documentation about [Problem Management][3]
 Configuration and Assets Management
 --------------------------------------
 
-In order to make to search and view CIs faster and more practical, the Configuration and Assets Management panel has been redesigned, considering the best experience for the user. The new search allows you to filter by groups, types, alerts and identification. 
+In order to make to search and view CIs faster and more practical, the Configuration and Assets Management panel has been redesigned, considering the best experience for the user. The new search allows you to filter by groups, types, alerts and identification.
 
 ![Configuration and Assets Management Panel](images/configuration-asset-panel.png)
 
@@ -286,7 +286,7 @@ One of the optional modules in this new version is the Smart Analytics, that all
 
 ## Audit Trail
 
-Audit trails have been created to give more transparency to the data usage and security of our system, there are three Audit options: **data**, **access** and **key**. 
+Audit trails have been created to give more transparency to the data usage and security of our system, there are three Audit options: **data**, **access** and **key**.
 
 For further information access the documentation about [System Audit][6]
 
@@ -355,5 +355,3 @@ For further information access the documentation about [Mobile CITSmart Experien
 
     <b>Product/Version:</b> CITSmart | 7.00 &nbsp;&nbsp;
     <b>Created:</b>03/14/2019 - André Fernandes
-
-
