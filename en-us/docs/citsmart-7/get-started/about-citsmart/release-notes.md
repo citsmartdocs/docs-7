@@ -3,34 +3,34 @@ Description: Release notes, policies information, bug fixes and improvements in 
 
 # Release Notes
 
-## Version 8.0.1.7 (2019/09/13)
+## Version 7.0.1.7 (2019/09/13)
 
-Welcome to CITSmart Version 8.0.1.7. This release has the following fixes:
+Welcome to CITSmart Version 7.0.1.7. This release has the following fixes:
 
 |Item|Description|
 |--------|---------|
 |5569|[ITSM 1652] – Failure in the Simple of Problem, Change and Release when creating a Workspace, the sprints overwrite themselves.|
 
-## Version 8.0.1.6 (2019/09/11)
+## Version 7.0.1.6 (2019/09/11)
 
-Welcome to CITSmart Version 8.0.1.6. This release has the following fixes:
+Welcome to CITSmart Version 7.0.1.6. This release has the following fixes:
 
 |Item|Description|
 |--------|---------|
 |5288|Safety – Do not make system users password visible|
 |5272|Safety – Do not allow access to the Script screen without logging in to the application|
 
-## Version 8.0.1.5 (2019/09/02)
+## Version 7.0.1.5 (2019/09/02)
 
-Welcome to CITSmart Version 8.0.1.5. This release has the following fixes:
+Welcome to CITSmart Version 7.0.1.5. This release has the following fixes:
 
 |Item|Description|
 |--------|---------|
 |5407|Simple – Functionality did not allow downloading attachments from Simple cards|
 
-## Version 8.0.1.4 (2019/08/20)
+## Version 7.0.1.4 (2019/08/20)
 
-Welcome to CITSmart Version 8.0.1.4. This release has the following fixes:
+Welcome to CITSmart Version 7.0.1.4. This release has the following fixes:
 
 |Item|Description|
 |--------|---------|
@@ -75,12 +75,12 @@ Welcome to CITSmart Version 8.0.1.4. This release has the following fixes:
 
 **Note:**
 
-In version 8.0.1.4 the “Description” field of the service request attendance screen will be blocked after the creation of a ticket.
+In version 7.0.1.4 the “Description” field of the service request attendance screen will be blocked after the creation of a ticket.
 
 
-## Version 8.0.1.3 (2019/07/31)
+## Version 7.0.1.3 (2019/07/31)
 
-Welcome to Citsmart Version 8.0.1.3. This release has the following fixes and improvements:
+Welcome to Citsmart Version 7.0.1.3. This release has the following fixes and improvements:
 
 |Item|Description|
 |--------|---------|
@@ -135,14 +135,14 @@ Welcome to Citsmart Version 8.0.1.3. This release has the following fixes and im
 
 **Note:**
 
-In version 8.0.1.3 the parameter “452 - Continue in the Ticket screen after saving?” was created. This parameter, when enabled, checks the user's permission to execute a ticket and allows the screen to remain..
+In version 7.0.1.3 the parameter “452 - Continue in the Ticket screen after saving?” was created. This parameter, when enabled, checks the user's permission to execute a ticket and allows the screen to remain..
 
-In version 8.0.1.3 the parameter “451 - Redirect page after saving the ticket in the Experience Center” was created, which allows informing the page that the user wants to return when an action in the Experience Center occurs.
+In version 7.0.1.3 the parameter “451 - Redirect page after saving the ticket in the Experience Center” was created, which allows informing the page that the user wants to return when an action in the Experience Center occurs.
 
 
-## Version 8.0.1.2 (2019/07/20)
+## Version 7.0.1.2 (2019/07/20)
 
-Welcome to the Citsmart Version 8.0.1.2. This version presents the following fixes.
+Welcome to the Citsmart Version 7.0.1.2. This version presents the following fixes.
 
 |Problem|Description|
 |-------|-----------|
@@ -150,11 +150,11 @@ Welcome to the Citsmart Version 8.0.1.2. This version presents the following fix
 |4537|Error in the LDAP synchronization|
 |4733|Slowness in Smart Portal when there is knowledge related|
 
-From version 8.0.1.2 it was inserted the parameter “454 - Display the smart portal knowledge tab only when there is content” this parameter controls the display of the Knowledge Tab in Smart Portal only when there is knowledge linked to the Activity, if it does not exist, the system does not display the tab.
+From version 7.0.1.2 it was inserted the parameter “454 - Display the smart portal knowledge tab only when there is content” this parameter controls the display of the Knowledge Tab in Smart Portal only when there is knowledge linked to the Activity, if it does not exist, the system does not display the tab.
 
-## Version 8.0.1.1 (2019/07/15)
+## Version 7.0.1.1 (2019/07/15)
 
-Welcome to the Citsmart Version 8.0.1.1. This release contains the following fixes.
+Welcome to the Citsmart Version 7.0.1.1. This release contains the following fixes.
 
 |Problem|Description|
 |-------|-----------|
@@ -166,9 +166,9 @@ Welcome to the Citsmart Version 8.0.1.1. This release contains the following fix
 |4168|[My 001] - Error while viewing a ticket by advanced search.|
 |4596|[My 705] - Verifying error in deadline calculation for tickets.|
 
-## Version 8.0.1.0 (2019/06/28)
+## Version 7.0.1.0 (2019/06/28)
 
-Welcome to Citsmart Version 8.0.1.0. The Version 8.0.1.0 of Citsmart presents the following improvements:
+Welcome to Citsmart Version 7.0.1.0. The Version 7.0.1.0 of Citsmart presents the following improvements:
 
 |Improvement|Description|
 |--------|---------|
@@ -195,9 +195,9 @@ Welcome to Citsmart Version 8.0.1.0. The Version 8.0.1.0 of Citsmart presents th
 |3911|Smart Portal - After ticket registration, direct the user to "My Requests".|
 |2615|Simple – Search for unselected items.|
 
-## Version 8.0.0.10 (2019/06/07)
+## Version 7.0.0.10 (2019/06/07)
 
-Welcome to CITSmart Version 8.0.0.10. This release features some emergency fixes.
+Welcome to CITSmart Version 7.0.0.10. This release features some emergency fixes.
 
 | Problem	| Description|
 |-----------|------------|
@@ -208,10 +208,10 @@ Welcome to CITSmart Version 8.0.0.10. This release features some emergency fixes
 |4028	| Correction in the presentation of the responsible person in the registration of an occurrence |
 |4148	| Improvement in the queries of the ticket listing |
 
-## Version 8.0.0.9 (2019/05/31)
+## Version 7.0.0.9 (2019/05/31)
 
-Welcome to the Citsmart Version 8.0.0.9
-Version 8.0.0.9 of CITSmart presents some emergency corrections.
+Welcome to the Citsmart Version 7.0.0.9
+Version 7.0.0.9 of CITSmart presents some emergency corrections.
 
 |Problem |Description|
 |--------|-----------|
@@ -224,7 +224,7 @@ Version 8.0.0.9 of CITSmart presents some emergency corrections.
 |3915|Optimizing SQL list of requests|
 |4038|Correction of image upload in portfolio presentation|
 
-## Version 8.0.0.7 (2019/05/17)
+## Version 7.0.0.7 (2019/05/17)
 
 With performance optimizations, usability improvements, adjustments and bug fixes.
 
@@ -315,7 +315,7 @@ Neuro: 1.2.4.10
 
 Audit: 0.4.0
 
-## Version 8.0.0.5 (2019/04/25)
+## Version 7.0.0.5 (2019/04/25)
 
 | Problem  | Description                                                                                                                                              |
 |----------|--------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -339,7 +339,7 @@ Note the following scenario:
 
 -   Preconditions:
 
-    1.  The client will be upgrading from version 7 to version 8.0.0.5;
+    1.  The client will be upgrading from version 7 to version 7.0.0.5;
 
     2.  The consultant did not parametrize in the Problem Portfolio the folder
         to save the Known Error knowledge base;
@@ -381,36 +381,36 @@ EVM: 2.0.0.3
 Audit: 0.2.0
 
 
-## Version 8.0.0.4 (2019/04/12)
+## Version 7.0.0.4 (2019/04/12)
 
 | Problem  | Description                                                                                |
 |----------|--------------------------------------------------------------------------------------------|
 | 3275     | Failure when restoring the Executor Group, Impact and Urgency in the Release Management    |
 
 
-## Version 8.0.0.3 (2019/04/04)
+## Version 7.0.0.3 (2019/04/04)
 
 | Problem | Description                                                                                                                                                                                                          |
 |----------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| 2573     | Known error in version 7.0.0.0 when answering to a satisfaction survey by Experience Center Widget. Version 8.0.0.3 provides a definitive solution to the error while registring a satisfaction survey.     |
-| 2122     | Webservice failed to create service request. Version 8.0.0.3 provides definitive solution to the failure presented when attempting to register a service request via webservice.                      |
-| 2917     | Failed to upload attachments by the service request functionality. Version 8.0.0.3 provides a solution for uploading attachments through the service request functionality.                  |
-| 2777     | Intermittent failure in the method that returns timezone to register the date and hour. In the Neuro component. Version 8.0.0.3 provides definitive solution in the Neuro component to register date and time. |
+| 2573     | Known error in version 7.0.0.0 when answering to a satisfaction survey by Experience Center Widget. Version 7.0.0.3 provides a definitive solution to the error while registring a satisfaction survey.     |
+| 2122     | Webservice failed to create service request. Version 7.0.0.3 provides definitive solution to the failure presented when attempting to register a service request via webservice.                      |
+| 2917     | Failed to upload attachments by the service request functionality. Version 7.0.0.3 provides a solution for uploading attachments through the service request functionality.                  |
+| 2777     | Intermittent failure in the method that returns timezone to register the date and hour. In the Neuro component. Version 7.0.0.3 provides definitive solution in the Neuro component to register date and time. |
 
 
-## Version 8.0.0.2 (2019/03/20)
+## Version 7.0.0.2 (2019/03/20)
 
 | Problem | Description                                                                                                                                                                                                                                                                 |
 |----------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| 2309     | Intermittent failure and of greater incidence in clustered environments in the method that returns timezone to register date and time. Version 8.0.0.2 provides definitive solution to the error that occurs in classes that use timezone for registration. |
-| 2124     | Incorrect validation failure while accessing an external knowledge base. Version 8.0.0.2 provides definitive solution to the session expiration message displayed improperly when the user attempted to access an external knowledge base.                    |
-| 2400     | Failure in the advanced search component that didn't return words with "ç" and "ã". Version 8.0.0.2 provides definitive solution for advanced search with accented words.                                                                                          |
+| 2309     | Intermittent failure and of greater incidence in clustered environments in the method that returns timezone to register date and time. Version 7.0.0.2 provides definitive solution to the error that occurs in classes that use timezone for registration. |
+| 2124     | Incorrect validation failure while accessing an external knowledge base. Version 7.0.0.2 provides definitive solution to the session expiration message displayed improperly when the user attempted to access an external knowledge base.                    |
+| 2400     | Failure in the advanced search component that didn't return words with "ç" and "ã". Version 7.0.0.2 provides definitive solution for advanced search with accented words.                                                                                          |
 
-## Version 8.0.0.1 (2019/03/08)
+## Version 7.0.0.1 (2019/03/08)
 
 | Problem | Description                                                                                                                                                                                      |
 |----------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| 2576     | Known error in the portfolio that is not displayed when there is an end date in the contract service. Version 8.0.0.1 provides a definitive solution to the error caused by the service portfolio. |
+| 2576     | Known error in the portfolio that is not displayed when there is an end date in the contract service. Version 7.0.0.1 provides a definitive solution to the error caused by the service portfolio. |
 
 ## Version 7.0.0.0 (2019/03/01)
 
