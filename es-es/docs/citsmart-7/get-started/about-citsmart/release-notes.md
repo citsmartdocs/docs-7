@@ -3,7 +3,7 @@ Description: Notas de release, correcciones de errores y mejoras en la CITSmart.
 
 # Notas de Release
 
-## Versión 7.0.1.7 (2019/09/13)
+## Versión 7.0.1.7
 
 Bienvenido a CITSmart Versión 7.0.1.7. Esta versión tiene las siguientes correcciones:
 
@@ -11,7 +11,7 @@ Bienvenido a CITSmart Versión 7.0.1.7. Esta versión tiene las siguientes corre
 |--------|---------|
 |5569|[ITSM 1652] – Fallo en el Simple de Problema, Cambio y Lanzamiento al crear un Workspace, las Sprints se sobrescriben.|
 
-## Versión 7.0.1.6 (2019/09/11)
+## Versión 7.0.1.6
 
 Bienvenido a CITSmart Versión 7.0.1.6. Esta versión tiene las siguientes correcciones:
 
@@ -20,7 +20,7 @@ Bienvenido a CITSmart Versión 7.0.1.6. Esta versión tiene las siguientes corre
 |5288|Seguridad – No hacer visible la contraseña de los usuarios del sistema|
 |5272|Seguridad – No permita el acceso a la pantalla del Script sin iniciar sesión en la aplicación|
 
-## Versión 7.0.1.5 (2019/09/02)
+## Versión 7.0.1.5
 
 Bienvenido a CITSmart Versión 7.0.1.5. Esta versión tiene las siguientes correcciones:
 
@@ -28,7 +28,7 @@ Bienvenido a CITSmart Versión 7.0.1.5. Esta versión tiene las siguientes corre
 |--------|---------|
 |5407|Simple – La funcionalidad no permitía descargar archivos adjuntos desde tarjetas del Simple|
 
-## Versión 7.0.1.4 (2019/08/20)
+## Versión 7.0.1.4
 
 Bienvenido a CITSmart Versión 7.0.1.4. Esta versión tiene las siguientes correcciones:
 
@@ -77,7 +77,7 @@ Bienvenido a CITSmart Versión 7.0.1.4. Esta versión tiene las siguientes corre
 
 En la versión 7.0.1.4, el campo "Descripción" de la pantalla de atención de solicitud de servicio se bloqueará después de la creación de un ticket.
 
-## Versión 7.0.1.3 (2019/07/31)
+## Versión 7.0.1.3
 
 Bienvenido a Citsmart Versión 7.0.1.3. Esta versión tiene las siguientes correcciones y mejoras:
 
@@ -138,7 +138,7 @@ En la versión 7.0.1.3 se creó el parámetro "452 - ¿Continuar en la pantalla 
 
 En la versión 7.0.1.3 se creó el parámetro "451 - Redirigir página después de guardar el Ticket en el Centro de Experiencia", que permite informar a la página que el usuario desea regresar cuando ocurre una acción en el Centro de Experiencia.
 
-## Versión 7.0.1.2 (2019/07/20)
+## Versión 7.0.1.2
 
 Bienvenido a Citsmart Versión 7.0.1.2. Esta versión tiene las siguientes correcciones.
 
@@ -150,7 +150,7 @@ Bienvenido a Citsmart Versión 7.0.1.2. Esta versión tiene las siguientes corre
 
 Desde la versión 7.0.1.2 se insertó el parámetro “454 - Mostrar la pestaña de conocimiento del smart portal solo cuando hay contenido” este parámetro controla la visualización de la Pestaña de Conocimiento en el Smart Portal solo cuando hay conocimiento vinculado a la Actividad, si no existe, el sistema no muestra la pestaña.
 
-## Versión 7.0.1.1 (2019/07/15)
+## Versión 7.0.1.1
 
 Bienvenidos a Citsmart Versión 7.0.1.1. Esta versión contiene las siguientes correcciones.
 
@@ -164,7 +164,7 @@ Bienvenidos a Citsmart Versión 7.0.1.1. Esta versión contiene las siguientes c
 |4168|[My 001] - Error al ver un ticket por búsqueda avanzada.|
 |4596|[My 705] - Verificar error en el cálculo de la fecha límite para tickets.|
 
-## Versión 7.0.1.0 (2019/06/28)
+## Versión 7.0.1.0
 
 Bienvenidos a Citsmart Versión 7.0.1.0. La versión 7.0.1.0 de Citsmart presenta las siguientes mejoras:
 
@@ -193,7 +193,7 @@ Bienvenidos a Citsmart Versión 7.0.1.0. La versión 7.0.1.0 de Citsmart present
 |3911|Smart Portal - Después del registro de ticket dirigir al usuario a "My Requests".|
 |2615|Simple – Búsqueda por elementos no seleccionados.|
 
-## Versión 7.0.0.10 (2019/06/07)
+## Versión 7.0.0.10
 
 Bienvenido a CITSmart Version 7.0.0.10. Esta versión presenta algunas correcciones de emergencia.
 
@@ -206,7 +206,7 @@ Bienvenido a CITSmart Version 7.0.0.10. Esta versión presenta algunas correccio
 |4028	 | Corrección para presentación de la persona responsable por el registro de ocurrencia |
 |4148	 | Mejora en las queries del listado de tickets |
 
-## Versión 7.0.0.9 (2019/05/31)
+## Versión 7.0.0.9
 
 Bienvenidos a Citsmart Versión 7.0.0.9
 La versión 7.0.0.9 del CITSmart presenta algunas correcciones de emergencia.
@@ -222,7 +222,7 @@ La versión 7.0.0.9 del CITSmart presenta algunas correcciones de emergencia.
 |3915|Optimizando SQL lista de solicitudes|
 |4038|Corrección de carga de imagen en la presentación del portafolio|
 
-## Versión 7.0.0.7 (2019/05/17)
+## Versión 7.0.0.7
 
 Con optimizaciones de rendimiento, mejoras de usabilidad, ajustes y correcciones de fallos.
 
@@ -315,7 +315,7 @@ Neuro: 1.2.4.10
 Audit: 0.4.0
 
 
-## Versión 7.0.0.5 (2019/04/25)
+## Versión 7.0.0.5
 
 | Problema | Descripción                                                                                                                                              |
 |----------|--------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -382,14 +382,14 @@ EVM: 2.0.0.3
 Audit: 0.2.0
 
 
-## Versión 7.0.0.4 (2019/04/12)
+## Versión 7.0.0.4
 
 | Problema | Descripción                                                                                     |
 |----------|-------------------------------------------------------------------------------------------------|
 | 3275     | Fallo en el momento de restaurar Grupo Ejecutor, Impacto y Urgencia en la Gestión de Liberación |
 
 
-## Versión 7.0.0.3 (2019/04/04)
+## Versión 7.0.0.3
 
 | Problema | Descripción                                                                                                                                                                                                          |
 |----------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -398,7 +398,7 @@ Audit: 0.2.0
 | 2917     | Error al cargar datos adjuntos por la funcionalidad de solicitud de servicio. La versión 7.0.0.3 proporciona una solución para cargar los datos adjuntos por la funcionalidad de solicitud de servicio.                  |
 | 2777     | Error intermitente en el método que devuelve el timezone para registrar fecha y hora. En el componente Neuro. La versión 7.0.0.3 proporciona una solución definitiva en el componente Neuro para registrar fecha y hora. |
 
-## Versión 7.0.0.2 (2019/03/20)
+## Versión 7.0.0.2
 
 | Problema | Descripción                                                                                                                                                                                                                                                                 |
 |----------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -406,13 +406,13 @@ Audit: 0.2.0
 | 2124     | Error de validación incorrecta al acceder a una base de conocimiento externa. La versión 7.0.0.2 proporciona una solución definitiva para el mensaje de caducidad de sesión mostrado indebidamente cuando el usuario intentaba acceder a una base de conocimiento externa.                    |
 | 2400     | Error en el componente de búsqueda avanzada que no devuelve palabras con "ç" y "ã". La versión 7.0.0.2 proporciona una solución definitiva para la búsqueda avanzada con palabras acentuadas.                                                                                          |
 
-## Versión 7.0.0.1 (2019/03/08)
+## Versión 7.0.0.1
 
 | Problema | Descripción                                                                                                                                                                                      |
 |----------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | 2576     | Error conocido en el portafolio que no se muestra cuando hay una fecha final en el servicio del contrato. La versión 7.0.0.1 proporciona una solución definitiva para el error ocasionado por el portafolio de servicios. |
 
-## Versión 7.0.0.0 (2019/03/01)
+## Versión 7.0.0.0
 
 |Tipo|Funcionalidad|Descripción|
 |----|-------------|-----------|
