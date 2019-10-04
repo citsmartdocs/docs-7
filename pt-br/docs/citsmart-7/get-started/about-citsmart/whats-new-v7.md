@@ -3,7 +3,7 @@ Description: Descreve O que há de novo no CITSmart 7.0
 
 # O que há de novo no CITSmart?
 
-## Versão 8.0.2.0
+## Versão 7.0.2.0
 
 :new: Melhorias de UI/UX no Centro de Experiência (CE) com novo menu de acesso aos CEs e possibilidade de redimensionamento do cabeçalho e logo, dentre outras;
 
@@ -28,7 +28,7 @@ Description: Descreve O que há de novo no CITSmart 7.0
 :new: Melhorias de performance e funcionalidades no Smartchat que permite além da comunicação entre atendente e solicitante, a comunicação entre atendentes;
 
 
-## Versão 8.0
+## Versão 7.0
 
 Uso da Logomarca e Login
 ------------------------
@@ -93,7 +93,7 @@ Saiba mais sobre o [Centro de Experiência][1]
 ### Widget Minhas Aprovações
 
 Aprovar um ticket pelo CITSmart ficou mais simples, basta clicar no ícone aprovar **(a.)**, é possível visualizar os detalhes do ticket e aprovar ou não **(b.)**.
- 
+
 ![a-Aprovar uma tarefa](images/approve-task.png)
 
 ![b-Visualização do Ticket](images/view-ticket.png)
@@ -112,7 +112,7 @@ Permite manter e visualizar áreas de trabalho por usuário com :
 
 * Widgets de dashboards
 * Relatórios nativos e
-* Relatórios construídos na plataforma. 
+* Relatórios construídos na plataforma.
 
 **Cada usuário pode configurar sua própria área com uma ou mais abas.**
 
@@ -121,7 +121,7 @@ Permite manter e visualizar áreas de trabalho por usuário com :
 Acesso Rápido
 -------------
 
-Novos ícones e área de acesso rápido aos processos e portais foram disponibilizados no área superior da plataforma de forma a tornar mais simples e prático o acesso às funcionalidades do CITSmart. 
+Novos ícones e área de acesso rápido aos processos e portais foram disponibilizados no área superior da plataforma de forma a tornar mais simples e prático o acesso às funcionalidades do CITSmart.
 
 ![Acesso Rápido](images/quick-access-pt.png)
 
@@ -185,7 +185,7 @@ O Gerenciamento de Problemas foi redesenhado para dar mais agilidade, facilidade
 
 ![Gerenciamento de problemas](images/problem-management.png)
 
-Para facilitar a tratativa do problema, uma sequência de passos foi estruturada em um menu lateral. 
+Para facilitar a tratativa do problema, uma sequência de passos foi estruturada em um menu lateral.
 
 *   Informações do Solicitante
 *   Incidentes relacionados ao problema
@@ -229,7 +229,7 @@ Saiba mais sobre [Gerenciamento de Problema][3]
 Gerenciamento de Configuração e Ativos
 --------------------------------------
 
-Com o objetivo de tornar a busca e visualização de ICs mais rápida e prática, o painel de Gerenciamento de Configuração e Ativos foi reformulado considerando a melhor experiência para o usuário, A nova busca permite filtrar por grupos, tipos, alertas e identificação. 
+Com o objetivo de tornar a busca e visualização de ICs mais rápida e prática, o painel de Gerenciamento de Configuração e Ativos foi reformulado considerando a melhor experiência para o usuário, A nova busca permite filtrar por grupos, tipos, alertas e identificação.
 
 ![Painel de Gerenciamento de Configuração e Ativo](images/configuration-asset-panel.png)
 
@@ -312,7 +312,7 @@ Um dos módulos opcionais nesta nova versão é o Smart Analytics que permite o 
 
 ## Trilha de Auditoria
 
-As trilhas de auditoria foram criadas para dar mais transparência do uso de dados e segurança do nosso sistema, existem três opções de Auditoria: de **dados**, de **acesso** e de **chave**. 
+As trilhas de auditoria foram criadas para dar mais transparência do uso de dados e segurança do nosso sistema, existem três opções de Auditoria: de **dados**, de **acesso** e de **chave**.
 
 Saiba mais sobre [Auditoria do Sistema][6]
 
@@ -386,4 +386,3 @@ Saiba mais sobre [Mobile CITSmart Experience][8]
 
     <b>Product/Version:</b> CITSmart | 7.00 &nbsp;&nbsp;
     <b>Created:</b>03/14/2019 - André Fernandes
-
