@@ -2,6 +2,9 @@ Title: Realizar a instalação
 
 # Realizar a instalação
 
+!!! success ""
+    Compatibilidade com a família de sistema operacionais Microsoft Windows Server (última versão e 64 bits), ou RedHat Linux (última versão e 64 bits), operando sobre plataforma virtualizada VMWare.
+
 ## Instalação do Servidor de Aplicação Wildfly
 
 1. Descompactar o pacote JAVA JDK no diretório /opt e criar um link
