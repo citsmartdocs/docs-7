@@ -22,6 +22,17 @@ Procedimento
 
 2.  Preencher os campos disponibilizados;
 
+    | Campo | Descrição | Exemplo |
+    |-------|-----------|---------|
+    | Nome | Informe o nome do Colaborador Usuário | John Doe  |
+    | Tipo de Parceiro | Selecione o tipo de parceiro | Colaborador |
+    | Situação | Selecione o status do colaborador | Ativo |
+    | E-mail | Informe o e-mail | john.doe@example.com |
+    | Telefone | Informe o número de telfone | 5555-5432 |
+    | Ramal | Informe o ramal | 123 |
+    | Unidade | Selecione a unidade de lotação | Brasília |
+    | Cargos | Selecione o cargo | Analista |
+
 3.  Clicar em "Gravar".
 
 
