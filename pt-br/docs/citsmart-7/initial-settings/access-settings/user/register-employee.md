@@ -24,7 +24,7 @@ Procedimento
 
     | Campo | Descrição | Exemplo |
     |-------|-----------|---------|
-    | Nome | Informe o nome do Colaborador Usuário | John Doe  |
+    | Nome | Informe o nome completo do Colaborador Usuário | John Doe  |
     | Tipo de Parceiro | Selecione o tipo de parceiro | Colaborador |
     | Situação | Selecione o status do colaborador | Ativo |
     | E-mail | Informe o e-mail | john.doe@example.com |
